@@ -1,22 +1,28 @@
+<!-- Duplicate of index.html for convenient previewing -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>TechFinance Magazine — Flipboard Edition</title>
+<title>TechFinance Feed — 即時社群卡片速報 (AI · 全球財經 · 科技)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Noto+Serif+TC:wght@400;600;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-color: #0b0c10;
-  --card-bg: #14161d;
-  --accent-red: #e71d36;
-  --gold: #d4af37;
-  --text-main: #f5f6fa;
-  --text-muted: #9ba1b0;
-  --font-serif: 'Noto Serif TC', 'Cinzel', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-page: #f7f9fa;
+  --card-bg: #ffffff;
+  --twitter-blue: #1d9bf0;
+  --twitter-blue-hover: #1a8cd8;
+  --fb-blue: #1877f2;
+  --text-main: #0f1419;
+  --text-secondary: #536471;
+  --text-sub: #8b98a5;
+  --border-light: #eff3f4;
+  --border-media: #cfd9de;
+  --like-red: #f91880;
+  --retweet-green: #00ba7c;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -27,605 +33,817 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: var(--bg-color);
+  background-color: var(--bg-page);
   color: var(--text-main);
-  font-family: var(--font-sans);
-  touch-action: pan-y;
+  font-family: var(--font-family);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 頂部導航列 (優化 iPad / 手機支援) */
 header {
+  position: sticky;
+  top: 0;
   height: 56px;
-  background: rgba(11, 12, 16, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 20px;
   z-index: 100;
-  flex-shrink: 0;
-  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.logo-badge {
-  background: var(--accent-red);
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1d9bf0, #1877f2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  font-weight: 900;
-  font-size: 14px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  letter-spacing: 1px;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(29, 155, 240, 0.3);
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .brand-title {
-  font-family: 'Cinzel', serif;
   font-weight: 800;
   font-size: 16px;
-  letter-spacing: 1.5px;
-  color: #fff;
-  white-space: nowrap;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
 }
 
-.tabs-wrapper {
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  display: flex;
-  padding: 4px 0;
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
-.tabs-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.tabs {
+.nav-tabs {
   display: flex;
   gap: 6px;
-  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 0;
 }
+.nav-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: var(--text-muted);
-  padding: 5px 12px;
-  border-radius: 18px;
-  font-size: 12px;
-  font-weight: 600;
+  border: none;
+  outline: none;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: #edf0f2;
+  color: var(--text-main);
 }
 
 .tab-btn.active {
-  background: #fff;
-  color: #0b0c10;
-  border-color: #fff;
+  background: var(--text-main);
+  color: #ffffff;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.mode-toggle {
-  display: flex;
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 2px;
-}
-
-.mode-btn {
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.mode-btn.active {
-  background: var(--accent-red);
-  color: #fff;
+  gap: 10px;
 }
 
 .refresh-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border-media);
+  border-radius: 9999px;
+  padding: 6px 14px;
   font-size: 12px;
-}
-
-/* 3D 舞台舞台容器 */
-.stage {
-  flex: 1;
-  width: 100%;
-  position: relative;
-  perspective: 2000px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  overflow: hidden;
-}
-
-.magazine-viewport {
-  width: 100%;
-  max-width: 1280px;
-  height: 100%;
-  position: relative;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-  background: var(--card-bg);
-  overflow: hidden;
-  touch-action: none;
-}
-
-/* 單個雜誌頁面 */
-.page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #11131a;
-  display: none;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.page.active {
-  display: block;
-  z-index: 10;
-  transform: translate(0, 0) rotate(0deg);
-  opacity: 1;
-}
-
-/* 封面故事 */
-.grid-cover {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px 24px;
-  background-size: cover;
-  background-position: center;
-}
-
-@media (min-width: 768px) {
-  .grid-cover {
-    padding: 60px 80px;
-  }
-}
-
-.grid-cover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(11,12,16,0.3) 0%, rgba(11,12,16,0.94) 85%);
-}
-
-.cover-content {
-  position: relative;
-  z-index: 2;
-  max-width: 760px;
-}
-
-.cover-tag {
-  display: inline-block;
-  padding: 4px 10px;
-  background: var(--accent-red);
-  color: #fff;
   font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  border-radius: 2px;
-}
-
-.cover-title {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 900;
-  line-height: 1.3;
-  color: #ffffff;
-  margin-bottom: 14px;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.8);
-}
-
-@media (min-width: 768px) {
-  .cover-title {
-    font-size: 40px;
-  }
-}
-
-.cover-desc {
-  font-size: 14px;
-  color: #d1d5db;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .cover-desc {
-    font-size: 16px;
-    -webkit-line-clamp: 4;
-  }
-}
-
-/* 雜誌排版模組網格 (支援手機單欄與 iPad/電腦雙欄) */
-.grid-bento {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 10px;
-  padding: 10px;
-  background: #0d0f15;
-}
-
-@media (min-width: 768px) {
-  .grid-bento {
-    grid-template-columns: 1.35fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 16px;
-    padding: 16px;
-  }
-}
-
-.card {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 18px;
+  color: var(--text-main);
   cursor: pointer;
-  text-decoration: none;
-}
-
-@media (min-width: 768px) {
-  .card {
-    padding: 26px;
-  }
-  .card-hero {
-    grid-row: span 2;
-    padding: 40px 32px;
-  }
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(13,15,21,0.96) 0%, rgba(13,15,21,0.48) 55%, rgba(13,15,21,0.12) 100%);
-}
-
-.card-content {
-  position: relative;
-  z-index: 2;
-}
-
-.card-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-
-.card-title {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1.35;
-  color: #fff;
-  margin-bottom: 6px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .card-title {
-    font-size: 17px;
-    -webkit-line-clamp: 3;
-  }
-  .card-hero .card-title {
-    font-size: 24px;
-  }
-}
-
-.card-desc {
-  display: none;
-  font-size: 13px;
-  color: #c4c9d4;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-@media (min-width: 768px) {
-  .card-hero .card-desc {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-}
-
-.card-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  color: #8b92a4;
+  gap: 5px;
+  transition: 0.15s ease;
 }
 
-.read-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 8px;
+.refresh-btn:hover {
+  background: #f0f3f5;
+  border-color: #b9cad4;
 }
 
-/* 控制底列 */
-.controls-bar {
-  height: 48px;
+.main-layout {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 16px 80px 16px;
+}
+
+.feed-header-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  color: var(--text-muted);
-  font-size: 12px;
-  flex-shrink: 0;
-  background: rgba(11, 12, 16, 0.8);
+  margin-bottom: 20px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
 }
 
-.flip-hint {
+.feed-header-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: #717786;
-}
-
-.page-indicator {
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1.5px;
-  color: #e0e4ef;
-  font-weight: 700;
-}
-
-.flip-nav {
-  display: flex;
   gap: 8px;
 }
 
-.nav-arrow {
-  width: 32px;
-  height: 32px;
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ba7c;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(0, 186, 124, 0.2);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 186, 124, 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 186, 124, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 186, 124, 0); }
+}
+
+.feed-header-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.feed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.post-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  border-color: #d8e1e7;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.author-block {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.author-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.avatar-ai { background: linear-gradient(135deg, #1d9bf0, #00ba7c); }
+.avatar-finance { background: linear-gradient(135deg, #00ba7c, #b38600); }
+.avatar-tech { background: linear-gradient(135deg, #7952b3, #1d9bf0); }
+
+.author-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.author-name-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.author-name {
+  font-weight: 750;
+  font-size: 14.5px;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+}
+
+.verified-badge {
+  display: inline-flex;
+  color: var(--twitter-blue);
+  width: 15px;
+  height: 15px;
+}
+
+.author-handle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.cat-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+}
+.cat-chip-ai { background: #e8f5fd; color: #1d9bf0; }
+.cat-chip-finance { background: #e6f9f0; color: #00ba7c; }
+.cat-chip-tech { background: #f3ebf9; color: #8e44ad; }
+
+.post-text-body {
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 16px;
+  font-weight: 750;
+  color: var(--text-main);
+  line-height: 1.42;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.post-title:hover {
+  color: var(--twitter-blue);
+}
+
+.post-desc {
+  font-size: 14.2px;
+  color: #272c30;
+  line-height: 1.62;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-hashtags {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--twitter-blue);
+  font-weight: 500;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.media-embed {
+  border: 1px solid var(--border-media);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #fbfcfd;
+  cursor: pointer;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.media-embed:hover {
+  border-color: #b9cad4;
+}
+
+.media-img-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #eef2f5;
+  overflow: hidden;
+  position: relative;
+}
+
+.media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.media-embed:hover .media-img {
+  transform: scale(1.02);
+}
+
+.media-preview-info {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.media-domain {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.media-view-btn {
+  color: var(--twitter-blue);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 6px 9px;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.action-item:hover {
+  background: #eef3f6;
+  color: var(--twitter-blue);
+}
+
+.action-item svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.action-item.like-btn:hover {
+  background: #fde8f2;
+  color: var(--like-red);
+}
+
+.action-item.like-btn.liked {
+  color: var(--like-red);
+}
+
+.action-item.trans-btn {
+  color: #059669;
+}
+.action-item.trans-btn:hover {
+  background: #e6f7ef;
+  color: #059669;
+}
+
+.reader-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 25, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.reader-modal.active {
+  opacity: 1;
+}
+
+.modal-content-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  border-radius: 20px;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: slideUp 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-media);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: 0.2s;
-  font-size: 13px;
+  z-index: 10;
+  color: var(--text-main);
+  transition: 0.15s ease;
 }
 
-.nav-arrow:disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
+.modal-close-btn:hover {
+  background: #eff3f5;
 }
 
-/* 載入動畫 */
-.loading-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--card-bg);
-  z-index: 150;
+.modal-hero-img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-body {
+  padding: 26px 28px 34px 28px;
+}
+
+.modal-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #e8f5fd;
+  color: var(--twitter-blue);
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.38;
+  margin-bottom: 12px;
+}
+
+.modal-meta-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.modal-lead-box {
+  background: #f8fafc;
+  border-left: 4px solid var(--twitter-blue);
+  padding: 14px 16px;
+  border-radius: 0 10px 10px 0;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.modal-text {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+.modal-text p {
+  margin-bottom: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--twitter-blue);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 9999px;
+  text-align: center;
+  transition: 0.15s;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  transition: opacity 0.3s ease;
+  gap: 6px;
 }
 
-.spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid rgba(255, 255, 255, 0.1);
-  border-top-color: var(--accent-red);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+.btn-primary:hover {
+  background: var(--twitter-blue-hover);
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.btn-secondary {
+  flex: 1;
+  background: #f1f5f9;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 9999px;
+  text-align: center;
+  transition: 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: rgba(15, 20, 25, 0.9);
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 0 14px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .main-layout {
+    padding: 14px 12px 60px 12px;
+  }
+  .feed-header-bar {
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .feed-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .post-card {
+    padding: 15px 14px;
+    border-radius: 16px;
+  }
+  .post-title {
+    font-size: 15.5px;
+  }
+  .post-desc {
+    font-size: 13.8px;
+    -webkit-line-clamp: 3;
+  }
+  .modal-content-card {
+    border-radius: 16px;
+    max-height: 94vh;
+  }
+  .modal-body {
+    padding: 20px 18px 28px 18px;
+  }
+  .modal-title {
+    font-size: 19px;
+  }
 }
 </style>
 </head>
 <body>
 
-<!-- 頂部欄 -->
 <header>
-  <div class="brand">
-    <div class="logo-badge">F</div>
-    <div class="brand-title">TECH INVESTOR</div>
-  </div>
-
-  <div class="tabs-wrapper">
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTopic('ALL')">綜合精選</button>
-      <button class="tab-btn" onclick="switchTopic('NVIDIA')">NVIDIA</button>
-      <button class="tab-btn" onclick="switchTopic('INTEL')">INTEL</button>
-      <button class="tab-btn" onclick="switchTopic('MICROSOFT')">MSFT</button>
-      <button class="tab-btn" onclick="switchTopic('GOOGLE')">GOOGLE</button>
+  <a class="brand" onclick="filterCategory('ALL')">
+    <div class="brand-icon">X</div>
+    <div class="brand-info">
+      <div class="brand-title">TechFinance</div>
+      <div class="brand-sub">即時社群卡片速報</div>
     </div>
+  </a>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="filterCategory('ALL', this)">🌐 全部動態</button>
+    <button class="tab-btn" onclick="filterCategory('AI', this)">🤖 人工智慧</button>
+    <button class="tab-btn" onclick="filterCategory('FINANCE', this)">📈 全球財經</button>
+    <button class="tab-btn" onclick="filterCategory('TECH', this)">⚡ 科技趨勢</button>
   </div>
 
   <div class="header-right">
-    <!-- 翻頁方向切換器 (左右翻 / 上下翻) -->
-    <div class="mode-toggle">
-      <button id="mode-h" class="mode-btn active" onclick="setFlipDirection('horizontal')">左右翻</button>
-      <button id="mode-v" class="mode-btn" onclick="setFlipDirection('vertical')">上下翻</button>
-    </div>
-
-    <button class="refresh-btn" onclick="reloadNews()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+    <button class="refresh-btn" onclick="loadNewsData(true)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 4v6h-6"></path>
+        <path d="M1 20v-6h6"></path>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+      </svg>
+      重新整理
     </button>
   </div>
 </header>
 
-<!-- 雜誌舞台 -->
-<div class="stage">
-  <div class="magazine-viewport" id="viewport">
-    <div class="loading-overlay" id="loader">
-      <div class="spinner"></div>
-      <div style="font-family: var(--font-serif); font-size: 13px;">正在編譯 Google RSS 財經雜誌...</div>
+<main class="main-layout">
+  <div class="feed-header-bar">
+    <div class="feed-header-title">
+      <span class="live-dot"></span>
+      <span id="feedStatusText">即時熱門動態</span>
+    </div>
+    <div class="feed-header-count" id="feedCountText">載入中...</div>
+  </div>
+
+  <div class="feed-grid" id="feedGrid"></div>
+</main>
+
+<div class="reader-modal" id="readerModal" onclick="closeReaderOnBackdrop(event)">
+  <div class="modal-content-card">
+    <button class="modal-close-btn" onclick="closeReader()">✕</button>
+    <img id="modalImg" class="modal-hero-img" src="" alt="">
+    <div class="modal-body">
+      <span id="modalBadge" class="modal-tag">特刊焦點</span>
+      <h2 id="modalTitle" class="modal-title">標題</h2>
+      <div class="modal-meta-row">
+        <span id="modalSource">📰 來源媒體</span>
+        <span id="modalDate">📅 發布時間</span>
+      </div>
+      <div id="modalLead" class="modal-lead-box">導讀金句摘要</div>
+      <div id="modalContent" class="modal-text">內文解析...</div>
+      <div class="modal-actions">
+        <a id="modalTranslateFullLink" href="#" target="_blank" rel="noopener" class="btn-primary">
+          🌐 Google 全篇繁中翻譯
+        </a>
+        <a id="modalOrigLink" href="#" target="_blank" rel="noopener" class="btn-secondary">
+          🔗 原始報導外電 ↗
+        </a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- 底部控制項 -->
-<div class="controls-bar">
-  <div class="flip-hint" id="hint-text">
-    <span>👈👉 <b>支援手勢左右滑動</b> / 鍵盤左右鍵翻頁</span>
-  </div>
-  <div class="page-indicator" id="page-num">PAGE 1 / 1</div>
-  <div class="flip-nav">
-    <button class="nav-arrow" id="prev-btn" onclick="prevPage()">◀</button>
-    <button class="nav-arrow" id="next-btn" onclick="nextPage()">▶</button>
-  </div>
-</div>
+<div class="toast-msg" id="toastMsg">已複製新聞連結</div>
 
 <script>
-let currentTopic = 'ALL';
-let flipDirection = 'horizontal'; // 'horizontal' (左右翻) 或 'vertical' (上下翻)
-let allData = {};
-let pages = [];
-let currentPageIndex = 0;
-let isFlipping = false;
+const VERIFIED_ICON_SVG = `
+<svg class="verified-badge" viewBox="0 0 24 24" fill="currentColor">
+  <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.33 2.33 4.99-4.99 1.42 1.42-6.41 6.4z"/>
+</svg>`;
 
-// 觸控手勢變數 (iPad / 手機滑動)
-let touchStartX = 0;
-let touchStartY = 0;
-let touchEndX = 0;
-let touchEndY = 0;
+let allData = { AI: [], FINANCE: [], TECH: [] };
+let currentTopic = 'ALL';
+let currentArticlesList = [];
+let likedPostIds = new Set();
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetchNews();
-  bindTouchAndEvents();
+  loadNewsData(false);
 });
 
-function setFlipDirection(direction) {
-  flipDirection = direction;
-  document.getElementById('mode-h').classList.toggle('active', direction === 'horizontal');
-  document.getElementById('mode-v').classList.toggle('active', direction === 'vertical');
-  
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const hint = document.getElementById('hint-text');
-
-  if (direction === 'horizontal') {
-    prevBtn.innerHTML = '◀';
-    nextBtn.innerHTML = '▶';
-    hint.innerHTML = '<span>👈👉 <b>支援手勢左右滑動</b> / 鍵盤左右鍵翻頁</span>';
-  } else {
-    prevBtn.innerHTML = '▲';
-    nextBtn.innerHTML = '▼';
-    hint.innerHTML = '<span>👆👇 <b>支援手勢上下滑動</b> / 鍵盤上下鍵翻頁</span>';
+async function loadNewsData(isManual = false) {
+  const feedGrid = document.getElementById('feedGrid');
+  if (isManual) {
+    feedGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: #536471;">
+        <div style="font-size: 28px; margin-bottom: 10px;">⚡</div>
+        <div style="font-weight: 700; font-size: 15px;">正在同步最新社群卡片外電...</div>
+      </div>
+    `;
   }
-}
 
-function switchTopic(topic) {
-  if (currentTopic === topic) return;
-  currentTopic = topic;
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.toggle('active', b.innerText.includes(topic) || (topic === 'ALL' && b.innerText.includes('綜合')));
-  });
-  buildPages();
-}
-
-function reloadNews() {
-  const loader = document.getElementById('loader');
-  loader.style.display = 'flex';
-  loader.style.opacity = '1';
-  fetchNews();
-}
-
-async function fetchNews() {
   try {
-    const res = await fetch('/api/news');
-    allData = await res.json();
-    buildPages();
+    const res = await fetch(`news.json?t=${Date.now()}`);
+    if (!res.ok) throw new Error('news.json fetch error');
+    const data = await res.json();
+    allData = {
+      AI: data.AI || [],
+      FINANCE: data.FINANCE || [],
+      TECH: data.TECH || []
+    };
+    renderFeed();
+    if (isManual) showToast('已成功同步最新動態！');
   } catch (err) {
-    console.error('Fetch error:', err);
-    alert('獲取 Google RSS 失敗，正在自動重試...');
-  } finally {
-    const loader = document.getElementById('loader');
-    loader.style.opacity = '0';
-    setTimeout(() => { loader.style.display = 'none'; }, 300);
+    console.warn('載入 news.json 失敗，改用後端 API 或預設資料', err);
+    try {
+      const resApi = await fetch(`/api/news?t=${Date.now()}`);
+      if (resApi.ok) {
+        const data = await resApi.json();
+        allData = {
+          AI: data.AI || [],
+          FINANCE: data.FINANCE || [],
+          TECH: data.TECH || []
+        };
+        renderFeed();
+        return;
+      }
+    } catch(e){}
+    feedGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: #536471;">
+        <div style="font-size: 24px; margin-bottom: 8px;">⚠️</div>
+        <div style="font-weight: 600;">暫時無法取得新聞資料，請稍後再試。</div>
+      </div>
+    `;
   }
 }
 
-function buildPages() {
-  const viewport = document.getElementById('viewport');
-  const loader = document.getElementById('loader');
-  viewport.innerHTML = '';
-  viewport.appendChild(loader);
+function filterCategory(topic, btnElement = null) {
+  currentTopic = topic;
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) {
+    btnElement.classList.add('active');
+  } else {
+    const defaultBtn = document.querySelector(`.tab-btn[onclick*="${topic}"]`);
+    if (defaultBtn) defaultBtn.classList.add('active');
+  }
+
+  renderFeed();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderFeed() {
+  const grid = document.getElementById('feedGrid');
+  grid.innerHTML = '';
 
   let articles = [];
+  const keys = ['AI', 'FINANCE', 'TECH'];
+
   if (currentTopic === 'ALL') {
-    const keys = ['NVIDIA', 'INTEL', 'MICROSOFT', 'GOOGLE'];
     let maxLen = Math.max(...keys.map(k => (allData[k] || []).length));
     for (let i = 0; i < maxLen; i++) {
       for (const k of keys) {
@@ -638,302 +856,244 @@ function buildPages() {
     articles = allData[currentTopic] || [];
   }
 
-  pages = [];
+  currentArticlesList = articles;
+
+  const topicNames = {
+    'ALL': '全部焦點動態',
+    'AI': '人工智慧 (AI) 專題',
+    'FINANCE': '全球財經 (Finance) 專題',
+    'TECH': '科技趨勢 (Tech) 專題'
+  };
+
+  document.getElementById('feedStatusText').innerText = topicNames[currentTopic] || '即時動態';
+  document.getElementById('feedCountText').innerText = `共 ${articles.length} 則精選外電`;
 
   if (articles.length === 0) {
-    const emptyPage = document.createElement('div');
-    emptyPage.className = 'page active';
-    emptyPage.innerHTML = `<div style="height:100%; display:flex; align-items:center; justify-content:center;"><h2>暫無資料</h2></div>`;
-    viewport.appendChild(emptyPage);
-    updateUI();
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: #536471;">
+        暫無此分類資料
+      </div>
+    `;
     return;
   }
 
-  // 封面頁
-  const cover = articles[0];
-  const p1 = document.createElement('div');
-  p1.className = 'page';
-  p1.innerHTML = `
-    <div class="grid-cover" style="background-image: url('${cover.image}')">
-      <div class="cover-content">
-        <span class="cover-tag">${cover.company} · ${cover.ticker} 特刊焦點</span>
-        <h1 class="cover-title">${cover.title}</h1>
-        <p class="cover-desc">${cover.description}</p>
-        <div class="card-meta" style="margin-bottom: 16px;">
-          <span>📰 ${cover.source}</span>
-          <span>📅 ${cover.pubDate}</span>
+  const getCatBadge = (c) => {
+    if (c === 'AI') return { text: '#AI', class: 'cat-chip-ai', avatarClass: 'avatar-ai', initial: 'AI' };
+    if (c === 'FINANCE') return { text: '#財經', class: 'cat-chip-finance', avatarClass: 'avatar-finance', initial: '$' };
+    return { text: '#科技', class: 'cat-chip-tech', avatarClass: 'avatar-tech', initial: '⚡' };
+  };
+
+  articles.forEach((item, index) => {
+    const catInfo = getCatBadge(item.category);
+    const postId = `post_${index}`;
+    const isLiked = likedPostIds.has(postId);
+    const likeCount = 18 + (index * 7) % 85 + (isLiked ? 1 : 0);
+
+    let domain = 'news.source';
+    try {
+      const u = new URL(item.link);
+      domain = u.hostname.replace('www.', '');
+    } catch(e) {
+      domain = item.source || 'news';
+    }
+
+    const card = document.createElement('article');
+    card.className = 'post-card';
+    card.innerHTML = `
+      <div class="post-header">
+        <div class="author-block">
+          <div class="author-avatar ${catInfo.avatarClass}">${catInfo.initial}</div>
+          <div class="author-meta">
+            <div class="author-name-row">
+              <span class="author-name">${item.source || '科技財經外電'}</span>
+              ${VERIFIED_ICON_SVG}
+            </div>
+            <div class="author-handle">
+              <span>@${domain.split('.')[0]}</span>
+              <span>·</span>
+              <span>${item.pubDate || '今日'}</span>
+            </div>
+          </div>
         </div>
-        <a href="${cover.link}" target="_blank" class="cover-tag" style="background:#fff; color:#0b0c10; text-decoration:none; cursor:pointer;">
-          閱讀完整原文 ↗
-        </a>
+        <span class="cat-chip ${catInfo.class}">${catInfo.text}</span>
       </div>
-    </div>
-  `;
-  viewport.appendChild(p1);
-  pages.push(p1);
 
-  // 雜誌分頁 (每頁 3 篇)
-  let idx = 1;
-  while (idx < articles.length) {
-    const chunk = articles.slice(idx, idx + 3);
-    const p = document.createElement('div');
-    p.className = 'page';
+      <div class="post-text-body" onclick="openReader(${index})">
+        <h3 class="post-title">${item.title}</h3>
+        <p class="post-desc">${item.description}</p>
+        <div class="post-hashtags">
+          <span>${catInfo.text}</span>
+          <span>#即時快訊</span>
+          <span>#深度觀點</span>
+        </div>
+      </div>
 
-    const h = chunk[0], s1 = chunk[1], s2 = chunk[2];
-    let html = `<div class="grid-bento">`;
-
-    if (h) {
-      html += `
-        <a href="${h.link}" target="_blank" class="card card-hero" style="background-image: url('${h.image}')">
-          <div class="card-content">
-            <span class="card-badge">● ${h.company} (${h.ticker})</span>
-            <h2 class="card-title">${h.title}</h2>
-            <p class="card-desc">${h.description}</p>
-            <div class="card-meta">
-              <span>${h.source}</span>
-              <span>${h.pubDate}</span>
-            </div>
-            <div class="read-btn">開啟閱讀 ↗</div>
+      <div class="media-embed" onclick="openReader(${index})">
+        <div class="media-img-box">
+          <img class="media-img" src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="media-preview-info">
+          <div class="media-domain">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            ${domain}
           </div>
-        </a>
-      `;
-    }
-
-    if (s1) {
-      html += `
-        <a href="${s1.link}" target="_blank" class="card" style="background-image: url('${s1.image}')">
-          <div class="card-content">
-            <span class="card-badge">● ${s1.company}</span>
-            <h3 class="card-title">${s1.title}</h3>
-            <div class="card-meta">
-              <span>${s1.source}</span>
-            </div>
+          <div class="media-view-btn">
+            精讀專題 📖
           </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="action-item" onclick="openReader(${index})">
+          <svg viewBox="0 0 24 24">
+            <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-1.602 4.41c-.42 1.16-1.933 1.34-2.615.32l-2.029-3.03c-.55.04-1.1.06-1.653.06-4.421 0-8.005-3.58-8.005-8z"/>
+          </svg>
+          <span>閱讀</span>
+        </button>
+
+        <a class="action-item trans-btn" href="https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+          </svg>
+          <span>翻譯</span>
         </a>
-      `;
-    }
 
-    if (s2) {
-      html += `
-        <a href="${s2.link}" target="_blank" class="card" style="background-image: url('${s2.image}')">
-          <div class="card-content">
-            <span class="card-badge">● ${s2.company}</span>
-            <h3 class="card-title">${s2.title}</h3>
-            <div class="card-meta">
-              <span>${s2.source}</span>
-            </div>
-          </div>
+        <a class="action-item" href="${item.link}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+          </svg>
+          <span>原文</span>
         </a>
-      `;
-    }
 
-    html += `</div>`;
-    p.innerHTML = html;
-    viewport.appendChild(p);
-    pages.push(p);
-    idx += 3;
-  }
+        <button class="action-item like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', this)">
+          <svg viewBox="0 0 24 24">
+            <path d="${isLiked ? 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' : 'M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z'}"/>
+          </svg>
+          <span class="like-counter">${likeCount}</span>
+        </button>
 
-  currentPageIndex = 0;
-  if (pages.length > 0) {
-    pages[0].classList.add('active');
-  }
-  updateUI();
-}
-
-function updateUI() {
-  const indicator = document.getElementById('page-num');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-
-  const total = Math.max(1, pages.length);
-  indicator.innerText = `PAGE ${currentPageIndex + 1} / ${total}`;
-
-  prevBtn.disabled = currentPageIndex <= 0;
-  nextBtn.disabled = currentPageIndex >= pages.length - 1;
-}
-
-// 翻至下一頁 (支援左右翻或上下翻 3D 動畫)
-function nextPage() {
-  if (isFlipping || currentPageIndex >= pages.length - 1) return;
-  isFlipping = true;
-
-  const current = pages[currentPageIndex];
-  const next = pages[currentPageIndex + 1];
-
-  const duration = '0.62s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-
-  if (flipDirection === 'horizontal') {
-    // 左右翻：書本向左翻折
-    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
-    current.style.transformOrigin = 'left center';
-    current.style.transform = 'rotateY(-90deg) scale(0.95)';
-    current.style.opacity = '0';
-
-    next.style.display = 'block';
-    next.style.transformOrigin = 'right center';
-    next.style.transform = 'rotateY(90deg) scale(0.95)';
-    next.style.opacity = '0';
-    next.style.transition = `transform ${duration}, opacity 0.62s ease`;
-  } else {
-    // 上下翻：向上掀開
-    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
-    current.style.transformOrigin = 'top center';
-    current.style.transform = 'rotateX(-90deg) scale(0.95)';
-    current.style.opacity = '0';
-
-    next.style.display = 'block';
-    next.style.transformOrigin = 'bottom center';
-    next.style.transform = 'rotateX(90deg) scale(0.95)';
-    next.style.opacity = '0';
-    next.style.transition = `transform ${duration}, opacity 0.62s ease`;
-  }
-
-  next.offsetHeight; // trigger reflow
-
-  next.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
-  next.style.opacity = '1';
-
-  setTimeout(() => {
-    current.classList.remove('active');
-    current.style.display = 'none';
-    current.style.transform = '';
-    current.style.opacity = '';
-
-    next.classList.add('active');
-    next.style.transform = '';
-    next.style.opacity = '';
-
-    currentPageIndex++;
-    updateUI();
-    isFlipping = false;
-  }, 620);
-}
-
-// 翻至上一頁
-function prevPage() {
-  if (isFlipping || currentPageIndex <= 0) return;
-  isFlipping = true;
-
-  const current = pages[currentPageIndex];
-  const prev = pages[currentPageIndex - 1];
-
-  const duration = '0.62s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-
-  if (flipDirection === 'horizontal') {
-    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
-    current.style.transformOrigin = 'right center';
-    current.style.transform = 'rotateY(90deg) scale(0.95)';
-    current.style.opacity = '0';
-
-    prev.style.display = 'block';
-    prev.style.transformOrigin = 'left center';
-    prev.style.transform = 'rotateY(-90deg) scale(0.95)';
-    prev.style.opacity = '0';
-    prev.style.transition = `transform ${duration}, opacity 0.62s ease`;
-  } else {
-    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
-    current.style.transformOrigin = 'bottom center';
-    current.style.transform = 'rotateX(90deg) scale(0.95)';
-    current.style.opacity = '0';
-
-    prev.style.display = 'block';
-    prev.style.transformOrigin = 'top center';
-    prev.style.transform = 'rotateX(-90deg) scale(0.95)';
-    prev.style.opacity = '0';
-    prev.style.transition = `transform ${duration}, opacity 0.62s ease`;
-  }
-
-  prev.offsetHeight; // trigger reflow
-
-  prev.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
-  prev.style.opacity = '1';
-
-  setTimeout(() => {
-    current.classList.remove('active');
-    current.style.display = 'none';
-    current.style.transform = '';
-    current.style.opacity = '';
-
-    prev.classList.add('active');
-    prev.style.transform = '';
-    prev.style.opacity = '';
-
-    currentPageIndex--;
-    updateUI();
-    isFlipping = false;
-  }, 620);
-}
-
-// 綁定觸控滑動 (iPad / 手機) 與鍵盤/滾輪
-function bindTouchAndEvents() {
-  const vp = document.getElementById('viewport');
-
-  // 觸控開始
-  vp.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-  }, { passive: true });
-
-  // 觸控結束
-  vp.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
-  }, { passive: true });
-
-  // 鍵盤支援
-  window.addEventListener('keydown', (e) => {
-    if (flipDirection === 'horizontal') {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextPage();
-      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevPage();
-    } else {
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') nextPage();
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') prevPage();
-    }
+        <button class="action-item" onclick="sharePost(${index})">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+          </svg>
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
   });
-
-  // 滑鼠滾輪
-  let wheelDelta = 0;
-  window.addEventListener('wheel', (e) => {
-    wheelDelta += e.deltaY;
-    if (Math.abs(wheelDelta) > 40) {
-      if (wheelDelta > 0) nextPage();
-      else prevPage();
-      wheelDelta = 0;
-    }
-  }, { passive: true });
 }
 
-function handleSwipe() {
-  const diffX = touchEndX - touchStartX;
-  const diffY = touchEndY - touchStartY;
-  const threshold = 40; // 最小觸控滑動距離
-
-  if (flipDirection === 'horizontal') {
-    // 左右滑動模式
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
-      if (diffX < 0) {
-        // 向左滑 -> 下一頁
-        nextPage();
-      } else {
-        // 向右滑 -> 上一頁
-        prevPage();
-      }
-    }
+function toggleLike(postId, btn) {
+  const counter = btn.querySelector('.like-counter');
+  let count = parseInt(counter.innerText) || 0;
+  if (likedPostIds.has(postId)) {
+    likedPostIds.delete(postId);
+    btn.classList.remove('liked');
+    counter.innerText = Math.max(0, count - 1);
   } else {
-    // 上下滑動模式
-    if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > threshold) {
-      if (diffY < 0) {
-        // 向上滑 -> 下一頁
-        nextPage();
-      } else {
-        // 向下滑 -> 上一頁
-        prevPage();
-      }
-    }
+    likedPostIds.add(postId);
+    btn.classList.add('liked');
+    counter.innerText = count + 1;
+    showToast('已按讚 ❤️');
   }
 }
+
+function sharePost(index) {
+  const item = currentArticlesList[index];
+  if (!item) return;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(item.link).then(() => {
+      showToast('已複製新聞原文連結！');
+    }).catch(() => {
+      showToast('連結：' + item.link);
+    });
+  } else {
+    showToast('已取得連結：' + item.link);
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toastMsg');
+  t.innerText = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function openReader(articleIndex) {
+  const item = currentArticlesList[articleIndex];
+  if (!item) return;
+
+  document.getElementById('modalImg').src = item.image;
+  const catNames = { 'AI': '🤖 人工智慧 (AI)', 'FINANCE': '📈 全球財經 (Finance)', 'TECH': '⚡ 科技趨勢 (Tech)' };
+  document.getElementById('modalBadge').innerText = catNames[item.category] || '特刊焦點';
+  document.getElementById('modalTitle').innerText = item.title;
+  document.getElementById('modalSource').innerText = `📰 來源媒體：${item.source}`;
+  document.getElementById('modalDate').innerText = `📅 發布時間：${item.pubDate}`;
+
+  let fullDesc = (item.description || '').trim();
+  let leadText = '';
+  let bodyParagraphs = [];
+
+  if (fullDesc.includes('。')) {
+    let parts = fullDesc.split('。');
+    leadText = parts[0] + '。';
+    let rest = parts.slice(1).join('。').trim();
+    if (rest) {
+      bodyParagraphs = rest.split(/(?<=[！？」”\n])/).filter(p => p.trim());
+    }
+  } else {
+    leadText = fullDesc;
+  }
+
+  document.getElementById('modalLead').innerText = leadText;
+
+  let bodyHtml = '';
+  if (bodyParagraphs.length > 0) {
+    bodyParagraphs.forEach(p => {
+      if (p.trim()) bodyHtml += `<p>${p.trim()}</p>`;
+    });
+  } else {
+    bodyHtml = `<p>本報導深度追蹤相關科技企業與全球資本市場動向。</p>`;
+  }
+
+  if (item.original_title && item.original_title !== item.title) {
+    bodyHtml += `<p style="margin-top:24px; padding:14px; background:#f4f6f9; border-radius:10px; font-size:13.5px; color:#555;"><b>📌 原文外電標題：</b>${item.original_title}</p>`;
+  }
+
+  document.getElementById('modalContent').innerHTML = bodyHtml;
+  document.getElementById('modalOrigLink').href = item.link;
+
+  const translatedWebUrl = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}`;
+  document.getElementById('modalTranslateFullLink').href = translatedWebUrl;
+
+  const modal = document.getElementById('readerModal');
+  modal.style.display = 'flex';
+  modal.offsetHeight;
+  modal.classList.add('active');
+  modal.scrollTop = 0;
+}
+
+function closeReader() {
+  const modal = document.getElementById('readerModal');
+  modal.classList.remove('active');
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 260);
+}
+
+function closeReaderOnBackdrop(e) {
+  if (e.target.id === 'readerModal') {
+    closeReader();
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeReader();
+});
 </script>
 </body>
 </html>
