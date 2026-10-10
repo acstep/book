@@ -340,13 +340,14 @@ header {
 }
 
 .post-desc {
-  font-size: 14.2px;
+  font-size: 14.5px;
   color: #272c30;
-  line-height: 1.62;
+  line-height: 1.68;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word;
 }
 
 .post-hashtags {
@@ -956,7 +957,7 @@ header {
   .post-desc {
     font-size: 20.5px;
     line-height: 1.68;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 6;
     color: #1f2428;
   }
   .post-hashtags {
@@ -1331,7 +1332,7 @@ function loadNextBatch() {
       <!-- 貼文標題與內文摘要 (點擊開啟乾淨專題) -->
       <div class="post-text-body" onclick="openReader(${index})">
         <h3 class="post-title">${item.title}</h3>
-        <p class="post-desc">${item.description}</p>
+        <p class="post-desc" id="postDesc_${index}">${item.description}</p>
         <div class="post-hashtags">
           <span>${catInfo.text}</span>
           <span>#即時快訊</span>
@@ -1399,9 +1400,13 @@ function loadNextBatch() {
     grid.appendChild(card);
   }
 
+  const prevRendered = renderedCount;
   renderedCount = nextCount;
   updateBottomStatus();
   isLoadingMore = false;
+
+  // 在前端本地非同步豐富前排卡片摘要（即時抓取並翻譯 4~5 行繁中精華，不侵權）
+  enrichVisibleCardSnippets(prevRendered, nextCount);
 }
 
 function updateBottomStatus() {
@@ -1485,6 +1490,68 @@ function showToast(msg) {
   t.innerText = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// 本地端非同步為卡片補齊 4~5 行精華內文並翻譯為繁中（動態即時運算，不在 GitHub 儲存內文，零版權疑慮）
+const snippetCache = new Map();
+async function enrichVisibleCardSnippets(startIdx, endIdx) {
+  // 針對當前批次中文字少於 40 字的卡片進行非同步擴充（如 Seeking Alpha 與部分外電）
+  for (let i = startIdx; i < endIdx; i++) {
+    const item = currentArticlesList[i];
+    if (!item || !item.link) continue;
+
+    // 若原摘要已很詳盡（如機器之心超過 70 字），則無需重複請求
+    if (item.description && item.description.length >= 75 && !item.description.includes('最新發布之專業報導')) {
+      continue;
+    }
+
+    const descEl = document.getElementById(`postDesc_${i}`);
+    if (!descEl) continue;
+
+    // 檢查快取
+    if (snippetCache.has(item.link)) {
+      descEl.innerText = snippetCache.get(item.link);
+      continue;
+    }
+
+    // 非同步向 Jina Reader 取得前幾段正文，並在本地端翻譯為繁中 (約 4~5 行長度)
+    fetchAndTranslateSnippet(item.link, descEl);
+  }
+}
+
+async function fetchAndTranslateSnippet(articleUrl, targetElement) {
+  try {
+    const jinaUrl = `https://r.jina.ai/${articleUrl}`;
+    const resp = await fetch(jinaUrl);
+    if (!resp.ok) return;
+    const text = await resp.text();
+
+    // 濾除標頭元數據，取出前 2~3 個有效段落 (約 250~350 字元)
+    let clean = text.replace(/^Title:[^\n]*\n/i, '')
+                    .replace(/^URL Source:[^\n]*\n/i, '')
+                    .replace(/^Published Time:[^\n]*\n/i, '')
+                    .replace(/^Markdown Content:[^\n]*\n/i, '');
+
+    const paragraphs = clean.split('\n')
+      .map(p => p.trim())
+      .filter(p => p.length > 25 && !p.startsWith('#') && !p.startsWith('![') && !p.startsWith('>') && !p.startsWith('['));
+
+    if (paragraphs.length === 0) return;
+
+    // 合併前 1~2 段組合成適中的 4~5 行長度
+    let candidateText = (paragraphs[0] + ' ' + (paragraphs[1] || '')).slice(0, 360).trim();
+
+    // 在本地端翻譯成繁體中文
+    const translated = await translateTextClient(candidateText);
+    if (translated && translated.length > 20) {
+      snippetCache.set(articleUrl, translated);
+      if (targetElement) {
+        targetElement.innerText = translated;
+      }
+    }
+  } catch (err) {
+    // 保持預設簡介，不中斷頁面
+  }
 }
 
 // 內頁閱讀器專欄 (autoLoadMagazine: 是否直接載入雜誌排版並全篇繁中翻譯)
