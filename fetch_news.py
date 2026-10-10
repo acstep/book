@@ -36,7 +36,22 @@ BACKUP_IMAGES = {
     ]
 }
 
+def translate_to_zh(text):
+    """將英文標題或摘要自動翻譯成流暢的繁體中文 (zh-TW)"""
+    if not text or not text.strip():
+        return text
+    try:
+        url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=" + urllib.parse.quote(text)
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            trans = ''.join([part[0] for part in data[0] if part and part[0]])
+            return trans if trans else text
+    except Exception:
+        return text
+
 def extract_og_image(url):
+    """連線原始網頁爬取真實 og:image 圖片"""
     if not url or not url.startswith('http'):
         return None
     try:
@@ -64,6 +79,7 @@ def extract_og_image(url):
     return None
 
 def process_single_item(item_data, company_key, idx):
+    # 1. 抓取原始真實封面圖
     link = item_data.get('link', '')
     real_img = extract_og_image(link)
     if real_img:
@@ -73,11 +89,19 @@ def process_single_item(item_data, company_key, idx):
         b_list = BACKUP_IMAGES[company_key]
         item_data['image'] = b_list[idx % len(b_list)]
         item_data['is_real_image'] = False
+
+    # 2. 自動翻譯為繁體中文
+    raw_title = item_data.get('title', '')
+    raw_desc = item_data.get('description', '')
+    item_data['title'] = translate_to_zh(raw_title)
+    item_data['description'] = translate_to_zh(raw_desc)
+    item_data['original_title'] = raw_title
+
     return item_data
 
 def run_fetch():
     results = {}
-    print("Starting fetching news for GitHub Pages...")
+    print("Starting fetching and translating news to Traditional Chinese...")
     for key, info in COMPANIES.items():
         sym = info['ticker']
         url = f"https://finance.yahoo.com/rss/headline?s={sym}"
@@ -96,7 +120,7 @@ def run_fetch():
                     desc = item.find('description').text if item.find('description') is not None else ''
                     clean_desc = re.sub(r'<[^>]+>', '', desc).strip()
                     if not clean_desc:
-                        clean_desc = f"{key} ({sym}) 最新市場動態與華爾街分析報告。"
+                        clean_desc = f"{key} ({sym}) 最新市場動向與華爾街分析報告。"
 
                     source_name = 'Yahoo Finance'
                     parsed_domain = urllib.parse.urlparse(link).netloc
@@ -113,21 +137,21 @@ def run_fetch():
                         'ticker': sym
                     })
 
+                # 平行處理圖片擷取與翻譯
                 with ThreadPoolExecutor(max_workers=6) as executor:
                     tasks = [executor.submit(process_single_item, p, key, i) for i, p in enumerate(prepared)]
                     items = [t.result() for t in tasks]
 
                 results[key] = items
-                print(f"✓ {key}: {len(items)} articles processed.")
+                print(f"✓ {key}: {len(items)} 則新聞已完成繁中翻譯與圖文處理。")
         except Exception as e:
-            print(f"✗ Error fetching {key}: {e}")
+            print(f"✗ 處理 {key} 失敗: {e}")
             results[key] = []
 
     out_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'news.json')
     with open(out_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    print(f"Done! Saved news data to {out_file}")
+    print(f"Done! 繁中雜誌資料已寫入 {out_file}")
 
 if __name__ == '__main__':
     run_fetch()
-
