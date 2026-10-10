@@ -1,4 +1,3 @@
-<!-- Duplicate of index.html for convenient previewing -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -42,6 +41,9 @@ html, body {
   overflow-y: auto;
 }
 
+/* ============================================================
+   頂部導航列 (Twitter / Facebook 頂部風格)
+   ============================================================ */
 header {
   position: sticky;
   top: 0;
@@ -157,12 +159,16 @@ header {
   border-color: #b9cad4;
 }
 
+/* ============================================================
+   主內容區容器 (雙欄 PC / 單欄手機)
+   ============================================================ */
 .main-layout {
   max-width: 1140px;
   margin: 0 auto;
   padding: 24px 16px 80px 16px;
 }
 
+/* 頂部動態計數條 */
 .feed-header-bar {
   display: flex;
   align-items: center;
@@ -206,6 +212,7 @@ header {
   color: var(--text-secondary);
 }
 
+/* 卡片動態網格 (PC: 一列兩卡；手機: 單列自適應) */
 .feed-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -213,6 +220,9 @@ header {
   align-items: start;
 }
 
+/* ============================================================
+   社群卡片樣式 (Twitter / Facebook Post Card)
+   ============================================================ */
 .post-card {
   background: var(--card-bg);
   border: 1px solid var(--border-light);
@@ -230,6 +240,7 @@ header {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
 }
 
+/* 貼文發布者資訊列 (User Header) */
 .post-header {
   display: flex;
   align-items: center;
@@ -307,6 +318,7 @@ header {
 .cat-chip-finance { background: #e6f9f0; color: #00ba7c; }
 .cat-chip-tech { background: #f3ebf9; color: #8e44ad; }
 
+/* 貼文主文字 (Headline & Summary) */
 .post-text-body {
   margin-bottom: 14px;
   cursor: pointer;
@@ -345,6 +357,7 @@ header {
   flex-wrap: wrap;
 }
 
+/* 社交媒體卡片嵌入 (Media Card Embed / Twitter Link Preview) */
 .media-embed {
   border: 1px solid var(--border-media);
   border-radius: 14px;
@@ -404,6 +417,7 @@ header {
   gap: 3px;
 }
 
+/* 卡片底部互動欄 (Twitter/Facebook Action Bar) */
 .action-bar {
   display: flex;
   align-items: center;
@@ -457,6 +471,55 @@ header {
   color: #059669;
 }
 
+/* 底部無限滾動狀態與加載中樣式 */
+.feed-bottom-status {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 20px 20px 20px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.loader-spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid #e1e8ed;
+  border-top-color: var(--twitter-blue);
+  border-radius: 50%;
+  animation: spinLoader 0.75s linear infinite;
+}
+
+@keyframes spinLoader {
+  to { transform: rotate(360deg); }
+}
+
+.load-all-btn {
+  background: #ffffff;
+  border: 1px solid var(--border-media);
+  border-radius: 9999px;
+  padding: 7px 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 4px;
+}
+.load-all-btn:hover {
+  background: #f0f3f5;
+  border-color: var(--twitter-blue);
+  color: var(--twitter-blue);
+}
+
+/* ============================================================
+   純淨雜誌閱讀彈窗 (Reader Modal)
+   ============================================================ */
 .reader-modal {
   position: fixed;
   inset: 0;
@@ -629,6 +692,7 @@ header {
   background: #e2e8f0;
 }
 
+/* Toast 提示條 */
 .toast-msg {
   position: fixed;
   bottom: 24px;
@@ -650,6 +714,9 @@ header {
   opacity: 1;
 }
 
+/* ============================================================
+   手機版自適應 (Screen Width <= 768px: 單列卡片、下滑無阻瀏覽)
+   ============================================================ */
 @media (max-width: 768px) {
   header {
     padding: 0 14px;
@@ -694,6 +761,7 @@ header {
 </head>
 <body>
 
+<!-- 頂部社群導航列 -->
 <header>
   <a class="brand" onclick="filterCategory('ALL')">
     <div class="brand-icon">X</div>
@@ -722,6 +790,7 @@ header {
   </div>
 </header>
 
+<!-- 主內容佈局 -->
 <main class="main-layout">
   <div class="feed-header-bar">
     <div class="feed-header-title">
@@ -731,9 +800,13 @@ header {
     <div class="feed-header-count" id="feedCountText">載入中...</div>
   </div>
 
-  <div class="feed-grid" id="feedGrid"></div>
+  <!-- 卡片動態網格 (PC: 一列兩卡；手機: 單列自適應) -->
+  <div class="feed-grid" id="feedGrid">
+    <!-- 動態生成 Twitter/Facebook 風格卡片 -->
+  </div>
 </main>
 
+<!-- 內頁閱讀器專欄彈窗 (Clean Social Reader) -->
 <div class="reader-modal" id="readerModal" onclick="closeReaderOnBackdrop(event)">
   <div class="modal-content-card">
     <button class="modal-close-btn" onclick="closeReader()">✕</button>
@@ -759,9 +832,11 @@ header {
   </div>
 </div>
 
+<!-- 吐司通知提示 -->
 <div class="toast-msg" id="toastMsg">已複製新聞連結</div>
 
 <script>
+// Verified SVG 圖標
 const VERIFIED_ICON_SVG = `
 <svg class="verified-badge" viewBox="0 0 24 24" fill="currentColor">
   <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.33 2.33 4.99-4.99 1.42 1.42-6.41 6.4z"/>
@@ -772,6 +847,7 @@ let currentTopic = 'ALL';
 let currentArticlesList = [];
 let likedPostIds = new Set();
 
+// 頁面初始化
 window.addEventListener('DOMContentLoaded', () => {
   loadNewsData(false);
 });
@@ -832,13 +908,19 @@ function filterCategory(topic, btnElement = null) {
     if (defaultBtn) defaultBtn.classList.add('active');
   }
 
+  renderedCount = 0;
   renderFeed();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+let renderedCount = 0;
+const BATCH_SIZE = 16;
+let isLoadingMore = false;
+
 function renderFeed() {
   const grid = document.getElementById('feedGrid');
   grid.innerHTML = '';
+  renderedCount = 0;
 
   let articles = [];
   const keys = ['AI', 'FINANCE', 'TECH'];
@@ -877,13 +959,29 @@ function renderFeed() {
     return;
   }
 
+  // 初始載入第一批卡片
+  loadNextBatch();
+}
+
+function loadNextBatch() {
+  if (renderedCount >= currentArticlesList.length) {
+    updateBottomStatus();
+    return;
+  }
+
+  const grid = document.getElementById('feedGrid');
+  const bottomBar = document.getElementById('feedBottomStatus');
+  if (bottomBar) bottomBar.remove();
+
+  const nextCount = Math.min(renderedCount + BATCH_SIZE, currentArticlesList.length);
   const getCatBadge = (c) => {
     if (c === 'AI') return { text: '#AI', class: 'cat-chip-ai', avatarClass: 'avatar-ai', initial: 'AI' };
     if (c === 'FINANCE') return { text: '#財經', class: 'cat-chip-finance', avatarClass: 'avatar-finance', initial: '$' };
     return { text: '#科技', class: 'cat-chip-tech', avatarClass: 'avatar-tech', initial: '⚡' };
   };
 
-  articles.forEach((item, index) => {
+  for (let index = renderedCount; index < nextCount; index++) {
+    const item = currentArticlesList[index];
     const catInfo = getCatBadge(item.category);
     const postId = `post_${index}`;
     const isLiked = likedPostIds.has(postId);
@@ -900,6 +998,7 @@ function renderFeed() {
     const card = document.createElement('article');
     card.className = 'post-card';
     card.innerHTML = `
+      <!-- 貼文者資訊列 -->
       <div class="post-header">
         <div class="author-block">
           <div class="author-avatar ${catInfo.avatarClass}">${catInfo.initial}</div>
@@ -918,6 +1017,7 @@ function renderFeed() {
         <span class="cat-chip ${catInfo.class}">${catInfo.text}</span>
       </div>
 
+      <!-- 貼文標題與內文摘要 (點擊開啟乾淨專題) -->
       <div class="post-text-body" onclick="openReader(${index})">
         <h3 class="post-title">${item.title}</h3>
         <p class="post-desc">${item.description}</p>
@@ -928,6 +1028,7 @@ function renderFeed() {
         </div>
       </div>
 
+      <!-- 社交媒體卡片嵌入 (Twitter Card / Facebook Preview Card) -->
       <div class="media-embed" onclick="openReader(${index})">
         <div class="media-img-box">
           <img class="media-img" src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
@@ -947,6 +1048,7 @@ function renderFeed() {
         </div>
       </div>
 
+      <!-- 社交互動欄 (Facebook / Twitter Actions) -->
       <div class="action-bar">
         <button class="action-item" onclick="openReader(${index})">
           <svg viewBox="0 0 24 24">
@@ -984,9 +1086,59 @@ function renderFeed() {
       </div>
     `;
     grid.appendChild(card);
-  });
+  }
+
+  renderedCount = nextCount;
+  updateBottomStatus();
+  isLoadingMore = false;
 }
 
+function updateBottomStatus() {
+  const grid = document.getElementById('feedGrid');
+  let bottomBar = document.getElementById('feedBottomStatus');
+  if (!bottomBar) {
+    bottomBar = document.createElement('div');
+    bottomBar.id = 'feedBottomStatus';
+    bottomBar.className = 'feed-bottom-status';
+    grid.appendChild(bottomBar);
+  }
+
+  if (renderedCount < currentArticlesList.length) {
+    bottomBar.innerHTML = `
+      <div class="loader-spinner"></div>
+      <div style="font-weight:600;">已載入 ${renderedCount} / ${currentArticlesList.length} 篇 · 往下捲動自動載入更多 ↓</div>
+      <button class="load-all-btn" onclick="renderAllRemaining()">一次展開全部外電</button>
+    `;
+  } else {
+    bottomBar.innerHTML = `
+      <div style="font-size:20px; margin-bottom:4px;">🎉</div>
+      <div style="font-weight:700; color:var(--text-main);">已為您載入全部 ${currentArticlesList.length} 篇外電動態</div>
+      <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">系統每小時自動從外電累積最新新聞</div>
+    `;
+  }
+}
+
+function renderAllRemaining() {
+  while (renderedCount < currentArticlesList.length) {
+    loadNextBatch();
+  }
+}
+
+// 監聽滾動事件：接近底部自動追加卡片 (Infinite Scroll)
+window.addEventListener('scroll', () => {
+  if (isLoadingMore) return;
+  if (renderedCount >= currentArticlesList.length) return;
+
+  const scrollBottom = window.innerHeight + window.scrollY;
+  const threshold = document.documentElement.scrollHeight - 700;
+
+  if (scrollBottom >= threshold) {
+    isLoadingMore = true;
+    loadNextBatch();
+  }
+}, { passive: true });
+
+// 點讚互動
 function toggleLike(postId, btn) {
   const counter = btn.querySelector('.like-counter');
   let count = parseInt(counter.innerText) || 0;
@@ -1002,6 +1154,7 @@ function toggleLike(postId, btn) {
   }
 }
 
+// 分享複製連結
 function sharePost(index) {
   const item = currentArticlesList[index];
   if (!item) return;
@@ -1023,6 +1176,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
+// 內頁閱讀器專欄
 function openReader(articleIndex) {
   const item = currentArticlesList[articleIndex];
   if (!item) return;
@@ -1091,6 +1245,7 @@ function closeReaderOnBackdrop(e) {
   }
 }
 
+// 支援鍵盤 Esc 關閉
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeReader();
 });

@@ -6,38 +6,48 @@ import re
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-# 三大核心類別與其對應的 RSS 串流組合 (保證每類別 25~35+ 篇以上海量文章)
+# 三大核心類別與其對應的 RSS 串流組合 (結合 Google News、Yahoo Finance、主流科技財經)
 CATEGORY_FEEDS = {
     'AI': {
         'name': '人工智慧 (AI)',
         'feeds': [
+            'https://news.google.com/rss/search?q=Artificial+Intelligence+AI&hl=en-US&gl=US&ceid=US:en',
+            'https://news.google.com/rss/search?q=OpenAI+Anthropic+Google+DeepMind+Nvidia&hl=en-US&gl=US&ceid=US:en',
             'https://finance.yahoo.com/rss/headline?s=NVDA',
             'https://finance.yahoo.com/rss/headline?s=MSFT',
             'https://finance.yahoo.com/rss/headline?s=GOOGL',
             'https://finance.yahoo.com/rss/headline?s=AMD',
-            'https://finance.yahoo.com/rss/headline?s=PLTR'
+            'https://finance.yahoo.com/rss/headline?s=PLTR',
+            'https://finance.yahoo.com/rss/headline?s=TSM'
         ],
         'default_tag': 'AI 尖端前沿'
     },
     'FINANCE': {
         'name': '全球財經 (Finance)',
         'feeds': [
+            'https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-US&gl=US&ceid=US:en',
+            'https://news.google.com/rss/search?q=Wall+Street+Stock+Market&hl=en-US&gl=US&ceid=US:en',
+            'https://news.google.com/rss/search?q=Federal+Reserve+Economy+Markets&hl=en-US&gl=US&ceid=US:en',
             'https://finance.yahoo.com/rss/headline?s=SPY',
             'https://finance.yahoo.com/rss/headline?s=QQQ',
             'https://finance.yahoo.com/rss/headline?s=TSLA',
             'https://finance.yahoo.com/rss/headline?s=JPM',
-            'https://finance.yahoo.com/rss/headline?s=AMZN'
+            'https://finance.yahoo.com/rss/headline?s=AMZN',
+            'https://finance.yahoo.com/rss/headline?s=BRK-B'
         ],
         'default_tag': '全球財經市場'
     },
     'TECH': {
         'name': '科技趨勢 (Tech)',
         'feeds': [
+            'https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=en-US&gl=US&ceid=US:en',
+            'https://news.google.com/rss/search?q=Tech+Hardware+Semiconductor+Cloud&hl=en-US&gl=US&ceid=US:en',
             'https://finance.yahoo.com/rss/headline?s=AAPL',
             'https://finance.yahoo.com/rss/headline?s=INTC',
             'https://finance.yahoo.com/rss/headline?s=META',
             'https://finance.yahoo.com/rss/headline?s=TSM',
-            'https://finance.yahoo.com/rss/headline?s=QCOM'
+            'https://finance.yahoo.com/rss/headline?s=QCOM',
+            'https://finance.yahoo.com/rss/headline?s=ORCL'
         ],
         'default_tag': '科技創新動向'
     }
@@ -49,19 +59,22 @@ BACKUP_IMAGES = {
         'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80'
+        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80'
     ],
     'FINANCE': [
         'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80'
+        'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80'
     ],
     'TECH': [
         'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80'
+        'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80'
     ]
 }
 
@@ -130,13 +143,30 @@ def process_single_item(item_data, cat_key, idx):
     return item_data
 
 def run_fetch():
+    out_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'news.json')
+
+    # 1. 載入既有歷史新聞 (累積機制：舊新聞永遠保留，不被清空)
+    existing_data = {'AI': [], 'FINANCE': [], 'TECH': []}
+    if os.path.exists(out_file):
+        try:
+            with open(out_file, 'r', encoding='utf-8') as f:
+                loaded = json.load(f)
+                for k in existing_data.keys():
+                    if k in loaded and isinstance(loaded[k], list):
+                        existing_data[k] = loaded[k]
+            print(f"Loaded existing history: AI={len(existing_data['AI'])}, FINANCE={len(existing_data['FINANCE'])}, TECH={len(existing_data['TECH'])}")
+        except Exception as e:
+            print(f"Failed to read existing news.json: {e}")
+
     results = {}
-    print("Starting massive fetching for categories: AI, FINANCE, TECH...")
+    print("\nStarting massive fetching for categories: AI, FINANCE, TECH...")
 
     for cat_key, cat_cfg in CATEGORY_FEEDS.items():
         print(f"\nFetching category [{cat_key}]...")
         raw_candidates = []
-        seen_links = set()
+        
+        # 取得既有歷史中的已存在連結，避免重複爬取與翻譯
+        seen_links = set(item.get('link', '') for item in existing_data.get(cat_key, []))
 
         for feed_url in cat_cfg['feeds']:
             try:
@@ -158,7 +188,7 @@ def run_fetch():
                             clean_desc = f"{cat_cfg['name']} 最新市場趨勢與深度分析報告。"
 
                         parsed_domain = urllib.parse.urlparse(link).netloc
-                        source_name = parsed_domain.replace('www.', '').capitalize() if parsed_domain else 'Yahoo Finance'
+                        source_name = parsed_domain.replace('www.', '').capitalize() if parsed_domain else '財經外電'
 
                         raw_candidates.append({
                             'title': title,
@@ -171,21 +201,24 @@ def run_fetch():
             except Exception as e:
                 print(f"Error reading feed {feed_url}: {e}")
 
-        # 每個類別精選 28 篇 (足夠翻 10~15 頁！)
-        selected_candidates = raw_candidates[:28]
-        print(f"Found {len(raw_candidates)} items in [{cat_key}], processing top {len(selected_candidates)}...")
+        # 本次新增候選文章 (取最新 25 篇進行翻譯與真實 og:image 抓取)
+        selected_new = raw_candidates[:25]
+        print(f"Found {len(raw_candidates)} new items in [{cat_key}], processing top {len(selected_new)}...")
 
-        with ThreadPoolExecutor(max_workers=8) as executor:
-            tasks = [executor.submit(process_single_item, item, cat_key, i) for i, item in enumerate(selected_candidates)]
-            cat_articles = [t.result() for t in tasks]
+        newly_processed = []
+        if selected_new:
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                tasks = [executor.submit(process_single_item, item, cat_key, i) for i, item in enumerate(selected_new)]
+                newly_processed = [t.result() for t in tasks]
 
-        results[cat_key] = cat_articles
-        print(f"✓ [{cat_key}] 完成 {len(cat_articles)} 篇深度新聞處理。")
+        # 核心：累積合併！新文章置頂，歷史文章接續在後 (上限保留 150 篇，三大類別達 450+ 篇海量庫)
+        combined_articles = newly_processed + existing_data.get(cat_key, [])
+        results[cat_key] = combined_articles[:150]
+        print(f"✓ [{cat_key}] 目前累計存儲 {len(results[cat_key])} 篇深度外電 (本次新增 {len(newly_processed)} 篇)。")
 
-    out_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'news.json')
     with open(out_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    print(f"\n全部完成！海量雜誌庫已寫入 {out_file}")
+    print(f"\n全部完成！海量新聞庫累計更新寫入 {out_file}")
 
 if __name__ == '__main__':
     run_fetch()
