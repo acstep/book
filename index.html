@@ -721,11 +721,10 @@ header {
 
   <div class="tabs-wrapper">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTopic('ALL')">綜合精選</button>
-      <button class="tab-btn" onclick="switchTopic('NVIDIA')">NVIDIA</button>
-      <button class="tab-btn" onclick="switchTopic('INTEL')">INTEL</button>
-      <button class="tab-btn" onclick="switchTopic('MICROSOFT')">MSFT</button>
-      <button class="tab-btn" onclick="switchTopic('GOOGLE')">GOOGLE</button>
+      <button class="tab-btn active" onclick="switchTopic('ALL')">全部精選</button>
+      <button class="tab-btn" onclick="switchTopic('AI')">🤖 人工智慧 (AI)</button>
+      <button class="tab-btn" onclick="switchTopic('FINANCE')">📈 全球財經</button>
+      <button class="tab-btn" onclick="switchTopic('TECH')">💻 科技趨勢</button>
     </div>
   </div>
 
@@ -906,8 +905,9 @@ function buildPages() {
   viewport.appendChild(loader);
 
   let articles = [];
+  const keys = ['AI', 'FINANCE', 'TECH'];
+
   if (currentTopic === 'ALL') {
-    const keys = ['NVIDIA', 'INTEL', 'MICROSOFT', 'GOOGLE'];
     let maxLen = Math.max(...keys.map(k => (allData[k] || []).length));
     for (let i = 0; i < maxLen; i++) {
       for (const k of keys) {
@@ -934,12 +934,13 @@ function buildPages() {
 
   // 封面頁
   const cover = articles[0];
+  const coverCatLabel = cover.category === 'AI' ? '人工智慧' : (cover.category === 'FINANCE' ? '全球財經' : '科技趨勢');
   const p1 = document.createElement('div');
   p1.className = 'page';
   p1.innerHTML = `
     <div class="grid-cover" style="background-image: url('${cover.image}')" onclick="openReader(0)">
       <div class="cover-content">
-        <span class="cover-tag">${cover.company} · ${cover.ticker} 特刊焦點</span>
+        <span class="cover-tag">${coverCatLabel} · 特刊頭條</span>
         <h1 class="cover-title">${cover.title}</h1>
         <p class="cover-desc">${cover.description}</p>
         <div class="card-meta" style="margin-bottom: 16px;">
@@ -967,11 +968,13 @@ function buildPages() {
     const s2 = articles[chunkIndices[2]];
     let html = `<div class="grid-bento">`;
 
+    const getCatLabel = (c) => c === 'AI' ? '人工智慧' : (c === 'FINANCE' ? '全球財經' : '科技趨勢');
+
     if (h) {
       html += `
         <div class="card card-hero" style="background-image: url('${h.image}')" onclick="openReader(${chunkIndices[0]})">
           <div class="card-content">
-            <span class="card-badge">● ${h.company} (${h.ticker})</span>
+            <span class="card-badge">● ${getCatLabel(h.category)}</span>
             <h2 class="card-title">${h.title}</h2>
             <p class="card-desc">${h.description}</p>
             <div class="card-meta">
@@ -988,7 +991,7 @@ function buildPages() {
       html += `
         <div class="card" style="background-image: url('${s1.image}')" onclick="openReader(${chunkIndices[1]})">
           <div class="card-content">
-            <span class="card-badge">● ${s1.company}</span>
+            <span class="card-badge">● ${getCatLabel(s1.category)}</span>
             <h3 class="card-title">${s1.title}</h3>
             <div class="card-meta">
               <span>${s1.source}</span>
@@ -1002,7 +1005,7 @@ function buildPages() {
       html += `
         <div class="card" style="background-image: url('${s2.image}')" onclick="openReader(${chunkIndices[2]})">
           <div class="card-content">
-            <span class="card-badge">● ${s2.company}</span>
+            <span class="card-badge">● ${getCatLabel(s2.category)}</span>
             <h3 class="card-title">${s2.title}</h3>
             <div class="card-meta">
               <span>${s2.source}</span>
@@ -1150,7 +1153,8 @@ function openReader(articleIndex) {
   if (!item) return;
 
   document.getElementById('modalImg').src = item.image;
-  document.getElementById('modalBadge').innerText = `${item.company} · ${item.ticker || ''}`;
+  const catNames = { 'AI': '人工智慧 (AI)', 'FINANCE': '全球財經 (Finance)', 'TECH': '科技趨勢 (Tech)' };
+  document.getElementById('modalBadge').innerText = catNames[item.category] || '特刊焦點';
   document.getElementById('modalTitle').innerText = item.title;
   document.getElementById('modalSource').innerText = `📰 來源媒體：${item.source}`;
   // 雜誌排版：將內文拆解成導言引句與多段落專業排版
