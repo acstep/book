@@ -6,56 +6,58 @@ import re
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-# 三大核心類別：全部採用 100% 原文直連、無重導向、乾淨可翻譯的權威媒體 RSS 源 (TechCrunch, MarketWatch, BBC, NYTimes, Yahoo)
-CATEGORY_FEEDS = {
-    'AI': {
-        'name': '人工智慧 (AI)',
-        'feeds': [
-            'https://techcrunch.com/category/artificial-intelligence/feed/',
-            'https://feeds.arstechnica.com/arstechnica/technology-lab',
-            'https://www.theverge.com/rss/index.xml',
-            'https://finance.yahoo.com/rss/headline?s=NVDA',
-            'https://finance.yahoo.com/rss/headline?s=MSFT',
-            'https://finance.yahoo.com/rss/headline?s=GOOGL',
-            'https://finance.yahoo.com/rss/headline?s=AMD',
-            'https://finance.yahoo.com/rss/headline?s=PLTR',
-            'https://finance.yahoo.com/rss/headline?s=TSM'
-        ],
-        'default_tag': 'AI 尖端前沿'
-    },
-    'FINANCE': {
-        'name': '全球財經 (Finance)',
-        'feeds': [
-            'https://feeds.content.dowjones.io/public/rss/mw_topstories',
-            'https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines',
-            'https://feeds.bbci.co.uk/news/business/rss.xml',
-            'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
-            'https://finance.yahoo.com/rss/headline?s=SPY',
-            'https://finance.yahoo.com/rss/headline?s=QQQ',
-            'https://finance.yahoo.com/rss/headline?s=TSLA',
-            'https://finance.yahoo.com/rss/headline?s=JPM',
-            'https://finance.yahoo.com/rss/headline?s=AMZN',
-            'https://finance.yahoo.com/rss/headline?s=BRK-B'
-        ],
-        'default_tag': '全球財經市場'
-    },
-    'TECH': {
-        'name': '科技趨勢 (Tech)',
-        'feeds': [
-            'https://techcrunch.com/feed/',
-            'https://feeds.bbci.co.uk/news/technology/rss.xml',
-            'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',
-            'https://feeds.arstechnica.com/arstechnica/index',
-            'https://finance.yahoo.com/rss/headline?s=AAPL',
-            'https://finance.yahoo.com/rss/headline?s=INTC',
-            'https://finance.yahoo.com/rss/headline?s=META',
-            'https://finance.yahoo.com/rss/headline?s=TSM',
-            'https://finance.yahoo.com/rss/headline?s=QCOM',
-            'https://finance.yahoo.com/rss/headline?s=ORCL'
-        ],
-        'default_tag': '科技創新動向'
-    }
+HTTP_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml,application/rss+xml;q=0.9,*/*;q=0.8'
 }
+
+# ============================================================
+# 20 大精選權威 AI 網站專屬來源清單 (100% 直連、無重導向、乾淨可翻譯)
+# ============================================================
+AI_FEEDS = [
+    # 一、頂級 AI 實驗室與開源官方 Blog
+    {'name': 'OpenAI', 'url': 'https://openai.com/news/rss.xml'},
+    {'name': 'Google DeepMind', 'url': 'https://deepmind.google/blog/rss.xml'},
+    {'name': 'Hugging Face', 'url': 'https://huggingface.co/blog/feed.xml'},
+    {'name': 'Meta AI', 'url': 'https://engineering.fb.com/category/ai-research/feed/'},
+    {'name': 'Microsoft Research', 'url': 'https://www.microsoft.com/en-us/research/feed/'},
+
+    # 二、硬核技術拆解與 AI 工程師專屬 Blog / Newsletter
+    {'name': 'Latent Space', 'url': 'https://www.latent.space/feed'},
+    {'name': 'MarkTechPost', 'url': 'https://www.marktechpost.com/feed/'},
+    {'name': 'Import AI', 'url': 'https://importai.substack.com/feed'},
+    {'name': 'Simon Willison', 'url': 'https://simonwillison.net/atom/everything/'},
+
+    # 三、AI 基準測試與算力硬體 Blog
+    {'name': 'SemiAnalysis', 'url': 'https://www.semianalysis.com/feed'},
+    {'name': "Tom's Hardware", 'url': 'https://www.tomshardware.com/feeds/all'},
+
+    # 四、主流科技媒體之 AI 專題新聞版面
+    {'name': 'VentureBeat AI', 'url': 'https://venturebeat.com/category/ai/feed/'},
+    {'name': 'TechCrunch AI', 'url': 'https://techcrunch.com/category/artificial-intelligence/feed/'},
+    {'name': 'MIT Tech Review', 'url': 'https://www.technologyreview.com/feed/'},
+    {'name': 'Ars Technica AI', 'url': 'https://feeds.arstechnica.com/arstechnica/technology-lab'},
+    {'name': 'The Verge AI', 'url': 'https://www.theverge.com/rss/index.xml'},
+    {'name': 'Wired AI', 'url': 'https://www.wired.com/feed/tag/ai/latest/rss'}
+]
+
+FINANCE_FEEDS = [
+    {'name': 'MarketWatch', 'url': 'https://feeds.content.dowjones.io/public/rss/mw_topstories'},
+    {'name': 'MarketWatch Realtime', 'url': 'https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines'},
+    {'name': 'BBC Business', 'url': 'https://feeds.bbci.co.uk/news/business/rss.xml'},
+    {'name': 'NYTimes Business', 'url': 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml'},
+    {'name': 'SemiAnalysis', 'url': 'https://www.semianalysis.com/feed'}
+]
+
+TECH_FEEDS = [
+    {'name': 'TechCrunch', 'url': 'https://techcrunch.com/feed/'},
+    {'name': 'BBC Tech', 'url': 'https://feeds.bbci.co.uk/news/technology/rss.xml'},
+    {'name': 'NYTimes Tech', 'url': 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml'},
+    {'name': 'Ars Technica', 'url': 'https://feeds.arstechnica.com/arstechnica/index'},
+    {'name': "Tom's Hardware", 'url': 'https://www.tomshardware.com/feeds/all'},
+    {'name': 'The Verge', 'url': 'https://www.theverge.com/rss/index.xml'},
+    {'name': 'Wired', 'url': 'https://www.wired.com/feed/tag/ai/latest/rss'}
+]
 
 # 備援高畫質圖庫
 BACKUP_IMAGES = {
@@ -80,11 +82,6 @@ BACKUP_IMAGES = {
         'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80'
     ]
-}
-
-HTTP_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 }
 
 def translate_to_zh(text):
@@ -146,10 +143,137 @@ def process_single_item(item_data, cat_key, idx):
 
     return item_data
 
+def fetch_anthropic_news():
+    """專屬抓取器：Anthropic 官方新聞與技術公告"""
+    items = []
+    try:
+        url = 'https://www.anthropic.com/news'
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+            matches = re.findall(r'href=[\"\'](/news/[^\"\']+)[\"\'][^>]*>(.*?)</a>', html, re.S)
+            seen = set()
+            for href, text in matches:
+                full_link = f'https://www.anthropic.com{href}'
+                if full_link in seen:
+                    continue
+                seen.add(full_link)
+                clean_text = re.sub(r'<[^>]+>', ' ', text).strip()
+                title = clean_text.split('\n')[0].strip() if clean_text else 'Anthropic News'
+                # 排除純導覽或空字串
+                if len(title) > 5 and 'view all' not in title.lower():
+                    items.append({
+                        'title': title,
+                        'source': 'Anthropic News',
+                        'link': full_link,
+                        'pubDate': '最新發布',
+                        'description': f'Anthropic 官方前沿技術與模型研究公告：{title}',
+                        'category': 'AI'
+                    })
+    except Exception as e:
+        print(f"Anthropic fetch error: {e}")
+    return items
+
+def fetch_artificial_analysis_articles():
+    """專屬抓取器：Artificial Analysis 基準與評測文章"""
+    items = []
+    try:
+        url = 'https://artificialanalysis.ai/articles'
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+            slugs = set(re.findall(r'href=[\"\'](/articles/[^\"\'#?]+)[\"\']', html))
+            for slug in slugs:
+                clean_name = slug.replace('/articles/', '').replace('-', ' ').title()
+                items.append({
+                    'title': f'{clean_name} — AI Model Benchmark Analysis',
+                    'source': 'Artificial Analysis',
+                    'link': f'https://artificialanalysis.ai{slug}',
+                    'pubDate': '基準報告',
+                    'description': f'Artificial Analysis 權威模型實測數據分析，涵蓋 Token 輸出速度、延遲、吞吐量與性價比報告。',
+                    'category': 'AI'
+                })
+    except Exception as e:
+        print(f"Artificial Analysis fetch error: {e}")
+    return items
+
+def fetch_the_batch_issues():
+    """專屬抓取器：The Batch (by DeepLearning.AI 吳恩達團隊)"""
+    items = []
+    try:
+        url = 'https://www.deeplearning.ai/the-batch/'
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+            issues = sorted(list(set(re.findall(r'href=[\"\'](/the-batch/issue-[0-9]+)[\"\']', html))), reverse=True)
+            for issue_slug in issues[:5]:
+                num = issue_slug.split('-')[-1]
+                items.append({
+                    'title': f'The Batch Issue #{num}: AI Weekly Insights & Engineering Trends',
+                    'source': 'DeepLearning.AI The Batch',
+                    'link': f'https://www.deeplearning.ai{issue_slug}/',
+                    'pubDate': '週報精選',
+                    'description': f'吳恩達團隊 The Batch 每週深度技術分析，探討前沿 AI 論文、商業落地與工程趨勢。',
+                    'category': 'AI'
+                })
+    except Exception as e:
+        print(f"The Batch fetch error: {e}")
+    return items
+
+def fetch_feed_items(feed_cfg, cat_key, seen_links):
+    """解析標準 RSS 或 Atom 串流"""
+    feed_items = []
+    feed_url = feed_cfg['url']
+    source_name = feed_cfg['name']
+
+    try:
+        req = urllib.request.Request(feed_url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            content = resp.read()
+            root = ET.fromstring(content)
+            items = root.findall('.//item')
+            if not items:
+                items = root.findall('.//{http://www.w3.org/2005/Atom}entry')
+
+            for item in items:
+                link_node = item.find('link')
+                if link_node is None:
+                    continue
+                link = link_node.text or link_node.get('href', '')
+                link = link.strip() if link else ''
+
+                if not link or 'news.google.com' in link or link in seen_links:
+                    continue
+                seen_links.add(link)
+
+                title_node = item.find('title')
+                title = title_node.text.strip() if title_node is not None and title_node.text else '無標題'
+
+                pubDate_node = item.find('pubDate') or item.find('{http://www.w3.org/2005/Atom}published')
+                pubDate = pubDate_node.text[:16] if pubDate_node is not None and pubDate_node.text else ''
+
+                desc_node = item.find('description') or item.find('{http://www.w3.org/2005/Atom}summary')
+                desc = desc_node.text if desc_node is not None and desc_node.text else ''
+                clean_desc = re.sub(r'<[^>]+>', '', desc).strip()
+                if not clean_desc:
+                    clean_desc = f"{source_name} 最新發布之專業報導與深度分析。"
+
+                feed_items.append({
+                    'title': title,
+                    'source': source_name,
+                    'link': link,
+                    'pubDate': pubDate,
+                    'description': clean_desc,
+                    'category': cat_key
+                })
+    except Exception as e:
+        print(f"Feed error [{source_name}] ({feed_url}): {e}")
+    return feed_items
+
 def run_fetch():
     out_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'news.json')
 
-    # 1. 載入既有歷史新聞，並【徹底過濾清除】所有導致重導向錯誤的 news.google.com 連結！
+    # 載入既有乾淨歷史新聞 (排除 news.google.com)
     existing_data = {'AI': [], 'FINANCE': [], 'TECH': []}
     if os.path.exists(out_file):
         try:
@@ -157,90 +281,99 @@ def run_fetch():
                 loaded = json.load(f)
                 for k in existing_data.keys():
                     if k in loaded and isinstance(loaded[k], list):
-                        # 只保留非 news.google.com 的直連乾淨新聞
-                        clean_items = [
-                            item for item in loaded[k]
-                            if 'news.google.com' not in item.get('link', '')
+                        existing_data[k] = [
+                            x for x in loaded[k]
+                            if 'news.google.com' not in x.get('link', '')
                         ]
-                        existing_data[k] = clean_items
-            print(f"Loaded valid clean history: AI={len(existing_data['AI'])}, FINANCE={len(existing_data['FINANCE'])}, TECH={len(existing_data['TECH'])}")
+            print(f"Loaded existing clean history: AI={len(existing_data['AI'])}, FINANCE={len(existing_data['FINANCE'])}, TECH={len(existing_data['TECH'])}")
         except Exception as e:
             print(f"Failed to read existing news.json: {e}")
 
     results = {}
-    print("\nStarting clean direct-link fetching for AI, FINANCE, TECH...")
+    print("\nStarting comprehensive fetching for AI, FINANCE, TECH...")
 
-    for cat_key, cat_cfg in CATEGORY_FEEDS.items():
-        print(f"\nFetching category [{cat_key}]...")
-        raw_candidates = []
-        seen_links = set(item.get('link', '') for item in existing_data.get(cat_key, []))
+    # ==========================
+    # 1. 抓取 AI 專題 (整合 20 大權威 AI 網站)
+    # ==========================
+    print("\nFetching category [AI] across 20 top authority sources...")
+    ai_candidates = []
+    seen_ai_links = set(x.get('link', '') for x in existing_data.get('AI', []))
 
-        for feed_url in cat_cfg['feeds']:
-            try:
-                req = urllib.request.Request(feed_url, headers=HTTP_HEADERS)
-                with urllib.request.urlopen(req, timeout=5) as resp:
-                    content = resp.read()
-                    root = ET.fromstring(content)
-                    items = root.findall('.//item')
-                    if not items:
-                        items = root.findall('.//{http://www.w3.org/2005/Atom}entry')
+    # (A) 抓取 Anthropic, Artificial Analysis, The Batch
+    print("Fetching direct editorial sites (Anthropic, Artificial Analysis, The Batch)...")
+    special_items = fetch_anthropic_news() + fetch_artificial_analysis_articles() + fetch_the_batch_issues()
+    for s_item in special_items:
+        if s_item['link'] not in seen_ai_links:
+            seen_ai_links.add(s_item['link'])
+            ai_candidates.append(s_item)
 
-                    for item in items:
-                        # 支援 RSS <link> 或 Atom <link href="...">
-                        link_node = item.find('link')
-                        if link_node is None:
-                            continue
-                        link = link_node.text or link_node.get('href', '')
-                        link = link.strip() if link else ''
+    # (B) 並行抓取所有 AI RSS 串流
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        feed_tasks = [executor.submit(fetch_feed_items, f_cfg, 'AI', seen_ai_links) for f_cfg in AI_FEEDS]
+        for t in feed_tasks:
+            ai_candidates.extend(t.result())
 
-                        # 徹底排除無效的 news.google.com 重導向
-                        if not link or 'news.google.com' in link or link in seen_links:
-                            continue
-                        seen_links.add(link)
+    selected_ai = ai_candidates[:35]
+    print(f"Found {len(ai_candidates)} new AI items, processing top {len(selected_ai)}...")
+    new_ai_processed = []
+    if selected_ai:
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            tasks = [executor.submit(process_single_item, item, 'AI', i) for i, item in enumerate(selected_ai)]
+            new_ai_processed = [t.result() for t in tasks]
 
-                        title_node = item.find('title')
-                        title = title_node.text.strip() if title_node is not None and title_node.text else '無標題'
+    results['AI'] = (new_ai_processed + existing_data.get('AI', []))[:150]
+    print(f"✓ [AI] 累積儲存 {len(results['AI'])} 篇 20 大權威直連新聞 (本次新增 {len(new_ai_processed)} 篇)。")
 
-                        pubDate_node = item.find('pubDate') or item.find('{http://www.w3.org/2005/Atom}published')
-                        pubDate = pubDate_node.text[:16] if pubDate_node is not None and pubDate_node.text else ''
+    # ==========================
+    # 2. 抓取 全球財經 (FINANCE)
+    # ==========================
+    print("\nFetching category [FINANCE]...")
+    finance_candidates = []
+    seen_fin_links = set(x.get('link', '') for x in existing_data.get('FINANCE', []))
 
-                        desc_node = item.find('description') or item.find('{http://www.w3.org/2005/Atom}summary')
-                        desc = desc_node.text if desc_node is not None and desc_node.text else ''
-                        clean_desc = re.sub(r'<[^>]+>', '', desc).strip()
-                        if not clean_desc:
-                            clean_desc = f"{cat_cfg['name']} 最新市場趨勢與深度分析報告。"
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        fin_tasks = [executor.submit(fetch_feed_items, f_cfg, 'FINANCE', seen_fin_links) for f_cfg in FINANCE_FEEDS]
+        for t in fin_tasks:
+            finance_candidates.extend(t.result())
 
-                        parsed_domain = urllib.parse.urlparse(link).netloc
-                        source_name = parsed_domain.replace('www.', '').capitalize() if parsed_domain else '權威外電'
+    selected_fin = finance_candidates[:25]
+    print(f"Found {len(finance_candidates)} new FINANCE items, processing top {len(selected_fin)}...")
+    new_fin_processed = []
+    if selected_fin:
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            tasks = [executor.submit(process_single_item, item, 'FINANCE', i) for i, item in enumerate(selected_fin)]
+            new_fin_processed = [t.result() for t in tasks]
 
-                        raw_candidates.append({
-                            'title': title,
-                            'source': source_name,
-                            'link': link,
-                            'pubDate': pubDate,
-                            'description': clean_desc,
-                            'category': cat_key
-                        })
-            except Exception as e:
-                print(f"Feed error {feed_url}: {e}")
+    results['FINANCE'] = (new_fin_processed + existing_data.get('FINANCE', []))[:150]
+    print(f"✓ [FINANCE] 累積儲存 {len(results['FINANCE'])} 篇權威直連財經新聞。")
 
-        selected_new = raw_candidates[:25]
-        print(f"Found {len(raw_candidates)} clean items in [{cat_key}], processing top {len(selected_new)}...")
+    # ==========================
+    # 3. 抓取 科技趨勢 (TECH)
+    # ==========================
+    print("\nFetching category [TECH]...")
+    tech_candidates = []
+    seen_tech_links = set(x.get('link', '') for x in existing_data.get('TECH', []))
 
-        newly_processed = []
-        if selected_new:
-            with ThreadPoolExecutor(max_workers=8) as executor:
-                tasks = [executor.submit(process_single_item, item, cat_key, i) for i, item in enumerate(selected_new)]
-                newly_processed = [t.result() for t in tasks]
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        tech_tasks = [executor.submit(fetch_feed_items, f_cfg, 'TECH', seen_tech_links) for f_cfg in TECH_FEEDS]
+        for t in tech_tasks:
+            tech_candidates.extend(t.result())
 
-        # 累積合併：新文章置頂，乾淨直連歷史文章接續在後
-        combined = newly_processed + existing_data.get(cat_key, [])
-        results[cat_key] = combined[:150]
-        print(f"✓ [{cat_key}] 累積儲存 {len(results[cat_key])} 篇 100% 直連無障礙新聞。")
+    selected_tech = tech_candidates[:25]
+    print(f"Found {len(tech_candidates)} new TECH items, processing top {len(selected_tech)}...")
+    new_tech_processed = []
+    if selected_tech:
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            tasks = [executor.submit(process_single_item, item, 'TECH', i) for i, item in enumerate(selected_tech)]
+            new_tech_processed = [t.result() for t in tasks]
 
+    results['TECH'] = (new_tech_processed + existing_data.get('TECH', []))[:150]
+    print(f"✓ [TECH] 累積儲存 {len(results['TECH'])} 篇權威直連科技新聞。")
+
+    # 寫入更新 news.json
     with open(out_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    print(f"\n全部完成！100% 直連權威外電已寫入 {out_file}")
+    print(f"\n全部完成！已成功整合 20 大權威 AI 網站，海量資料庫寫入 {out_file}")
 
 if __name__ == '__main__':
     run_fetch()
