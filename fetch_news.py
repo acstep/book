@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import json
 import re
 import os
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 HTTP_HEADERS = {
@@ -59,12 +60,19 @@ TECH_FEEDS = [
     {'name': 'Wired', 'url': 'https://www.wired.com/feed/tag/ai/latest/rss'}
 ]
 
-# 全新分類：股市 (Seeking Alpha 權威美股專欄)
+# 全新分類：股市 (Seeking Alpha 權威美股專欄與 41 檔熱門個股專屬 RSS)
+TICKERS = [
+    "NVDA", "PLTR", "MU", "MSFT", "AMD", "VRT", "META", "ARM", "AVGO", "GLW",
+    "AMAT", "NET", "GOOGL", "AMZN", "GEV", "ANET", "ZS", "MRVL", "CRWD", "DELL",
+    "ETN", "PANW", "SNOW", "QCOM", "CIEN", "CEG", "ASX", "OKTA", "CSCO", "ENPH",
+    "NTAP", "AMKR", "HPQ", "SMCI", "NEE", "INTC", "SPXC", "VST", "NRG", "WDC", "LUMN"
+]
+
 STOCKS_FEEDS = [
     {'name': 'Seeking Alpha', 'url': 'https://seekingalpha.com/feed.xml'},
     {'name': 'Seeking Alpha Market Currents', 'url': 'https://seekingalpha.com/market_currents.xml'},
     {'name': 'Wall St Breakfast', 'url': 'https://seekingalpha.com/tag/wall-st-breakfast.xml'}
-]
+] + [{'name': f'SA: {ticker}', 'url': f'https://seekingalpha.com/api/sa/combined/{ticker}.xml'} for ticker in TICKERS]
 
 # 備援高畫質圖庫
 BACKUP_IMAGES = {
@@ -99,18 +107,34 @@ BACKUP_IMAGES = {
 }
 
 def translate_to_zh(text):
-    """將英文標題或摘要自動翻譯成繁體中文 (zh-TW)"""
+    """將英文標題或摘要自動翻譯成繁體中文 (zh-TW)，支援雙引擎備援 (Google Translate + MyMemory)"""
     if not text or not text.strip():
         return text
+    # 1. 優先嘗試 Google Translate API
     try:
         url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=" + urllib.parse.quote(text)
         req = urllib.request.Request(url, headers=HTTP_HEADERS)
         with urllib.request.urlopen(req, timeout=3.5) as resp:
             data = json.loads(resp.read().decode('utf-8'))
             trans = ''.join([part[0] for part in data[0] if part and part[0]])
-            return trans if trans else text
+            if trans and trans.strip():
+                return trans.strip()
     except Exception:
-        return text
+        pass
+
+    # 2. 備援嘗試 MyMemory 翻譯引擎
+    try:
+        mm_url = f"https://api.mymemory.translated.net/get?q={urllib.parse.quote(text[:450])}&langpair=en|zh-TW"
+        req = urllib.request.Request(mm_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=3.5) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            trans = data.get('responseData', {}).get('translatedText', '')
+            if trans and 'MYMEMORY WARNING' not in trans and trans != text:
+                return trans.strip()
+    except Exception:
+        pass
+
+    return text
 
 def extract_og_image(url):
     """連線原始網頁爬取真實 og:image 圖片"""
@@ -385,18 +409,19 @@ def run_fetch():
     print(f"✓ [TECH] 累積儲存 {len(results['TECH'])} 篇權威直連科技新聞。")
 
     # ==========================
-    # 4. 抓取 股市 (STOCKS) - Seeking Alpha 三大權威美股專欄
+    # 4. 抓取 股市 (STOCKS) - Seeking Alpha 大盤專欄 + 41 檔特定美股個股
     # ==========================
-    print("\nFetching category [STOCKS] from Seeking Alpha feeds...")
+    print(f"\nFetching category [STOCKS] from {len(STOCKS_FEEDS)} Seeking Alpha feeds (with rate limiting)...")
     stocks_candidates = []
     seen_stocks_links = set(x.get('link', '') for x in existing_data.get('STOCKS', []))
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        stocks_tasks = [executor.submit(fetch_feed_items, f_cfg, 'STOCKS', seen_stocks_links) for f_cfg in STOCKS_FEEDS]
-        for t in stocks_tasks:
-            stocks_candidates.extend(t.result())
+    # 為避免一次高併發觸發 Seeking Alpha / Cloudflare 429 請求限制，採用受控輪詢，每請求間隔 0.6 秒
+    for f_cfg in STOCKS_FEEDS:
+        items = fetch_feed_items(f_cfg, 'STOCKS', seen_stocks_links)
+        stocks_candidates.extend(items)
+        time.sleep(0.6)
 
-    selected_stocks = stocks_candidates[:35]
+    selected_stocks = stocks_candidates[:50]
     print(f"Found {len(stocks_candidates)} new STOCKS items, processing top {len(selected_stocks)}...")
     new_stocks_processed = []
     if selected_stocks:
@@ -404,8 +429,8 @@ def run_fetch():
             tasks = [executor.submit(process_single_item, item, 'STOCKS', i) for i, item in enumerate(selected_stocks)]
             new_stocks_processed = [t.result() for t in tasks]
 
-    results['STOCKS'] = (new_stocks_processed + existing_data.get('STOCKS', []))[:150]
-    print(f"✓ [STOCKS] 累積儲存 {len(results['STOCKS'])} 篇 Seeking Alpha 深度股市外電。")
+    results['STOCKS'] = (new_stocks_processed + existing_data.get('STOCKS', []))[:200]
+    print(f"✓ [STOCKS] 累積儲存 {len(results['STOCKS'])} 篇 Seeking Alpha 深度股市外電與個股專欄。")
 
     # 寫入更新 news.json
     with open(out_file, 'w', encoding='utf-8') as f:
