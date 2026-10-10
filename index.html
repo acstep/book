@@ -635,11 +635,138 @@ header {
   font-weight: 500;
 }
 
+/* 雜誌模式沉浸排版 (Magazine Reader) */
+.modal-full-article {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 2px dashed #e2e8f0;
+}
+
+.modal-full-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-full-header h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reader-badge-clean {
+  background: #eef8f3;
+  color: #059669;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #c7eed9;
+}
+
+.modal-full-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Noto Sans TC", sans-serif;
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: #24292f;
+  word-break: break-word;
+}
+
+.modal-full-body p {
+  margin-bottom: 18px;
+  text-indent: 0;
+}
+
+.modal-full-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 18px 0;
+  display: block;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.modal-full-body h1, .modal-full-body h2, .modal-full-body h3 {
+  color: #0f1419;
+  font-weight: 800;
+  margin: 24px 0 12px 0;
+  line-height: 1.4;
+}
+
+.modal-full-body h2 {
+  font-size: 20px;
+  border-bottom: 1px solid #eaeef2;
+  padding-bottom: 6px;
+}
+
+.modal-full-body h3 {
+  font-size: 18px;
+}
+
+.modal-full-body blockquote {
+  border-left: 4px solid #cbd5e1;
+  padding: 10px 16px;
+  margin: 18px 0;
+  background: #f8fafc;
+  border-radius: 0 8px 8px 0;
+  color: #475569;
+  font-style: italic;
+}
+
+.modal-full-body ul, .modal-full-body ol {
+  padding-left: 24px;
+  margin-bottom: 18px;
+}
+
+.modal-full-body li {
+  margin-bottom: 8px;
+}
+
+.modal-loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px 16px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  background: #f8fafc;
+  border-radius: 14px;
+  margin-top: 14px;
+}
+
+.btn-magazine-fetch {
+  background: #0f1419;
+  color: #ffffff;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+  margin-top: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.btn-magazine-fetch:hover {
+  background: #272c30;
+  transform: translateY(-1px);
+}
+
 .modal-text {
   font-size: 15.5px;
   line-height: 1.8;
   color: #334155;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .modal-text p {
@@ -953,7 +1080,21 @@ header {
       </div>
       <div id="modalLead" class="modal-lead-box">導讀金句摘要</div>
       <div id="modalContent" class="modal-text">內文解析...</div>
-      <div class="modal-actions">
+
+      <!-- 雜誌純淨全文排版區塊 (Magazine Clean Reader) -->
+      <div class="modal-full-article" id="modalFullSection">
+        <div class="modal-full-header">
+          <h4>📖 雜誌純淨模式 <span class="reader-badge-clean">去廣告·純圖文</span></h4>
+          <button id="modalFetchFullBtn" class="btn-magazine-fetch" onclick="fetchMagazineArticle()">
+            <span>載入完整雜誌排版</span>
+          </button>
+        </div>
+        <div id="modalFullBody" class="modal-full-body">
+          <!-- 雜誌純淨圖文內容將在此動態展開 -->
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top:24px;">
         <a id="modalTranslateFullLink" href="#" target="_blank" rel="noopener" class="btn-primary">
           🌐 Google 全篇繁中翻譯
         </a>
@@ -1363,6 +1504,15 @@ function openReader(articleIndex) {
   document.getElementById('modalContent').innerHTML = bodyHtml;
   document.getElementById('modalOrigLink').href = item.link;
 
+  // 重設雜誌模式狀態
+  window.currentActiveArticle = item;
+  const fullBody = document.getElementById('modalFullBody');
+  const fetchBtn = document.getElementById('modalFetchFullBtn');
+  fullBody.innerHTML = '';
+  fullBody.style.display = 'none';
+  fetchBtn.disabled = false;
+  fetchBtn.innerHTML = '<span>載入完整雜誌排版</span>';
+
   const translatedWebUrl = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}`;
   document.getElementById('modalTranslateFullLink').href = translatedWebUrl;
 
@@ -1371,6 +1521,136 @@ function openReader(articleIndex) {
   modal.offsetHeight;
   modal.classList.add('active');
   modal.scrollTop = 0;
+}
+
+// 雜誌模式：透過 Jina Reader 萃取乾淨內文與圖片，濾除廣告與導覽
+async function fetchMagazineArticle() {
+  const item = window.currentActiveArticle;
+  if (!item || !item.link) return;
+
+  const fetchBtn = document.getElementById('modalFetchFullBtn');
+  const fullBody = document.getElementById('modalFullBody');
+
+  fetchBtn.disabled = true;
+  fetchBtn.innerHTML = '<span class="loader-spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;"></span> <span style="vertical-align:middle;">純淨排版生成中...</span>';
+
+  fullBody.style.display = 'block';
+  fullBody.innerHTML = `
+    <div class="modal-loading-box">
+      <div class="loader-spinner"></div>
+      <div>正在過濾原始網頁雜訊、萃取高清圖片與核心內文...</div>
+    </div>
+  `;
+
+  try {
+    const jinaUrl = `https://r.jina.ai/${item.link}`;
+    const resp = await fetch(jinaUrl);
+    if (!resp.ok) throw new Error('Network response not ok');
+    const markdown = await resp.text();
+
+    // 將 Markdown 轉化為雜誌排版 HTML (過濾導覽、廣告、標籤)
+    const cleanHtml = formatMagazineMarkdown(markdown);
+    fullBody.innerHTML = cleanHtml;
+    fetchBtn.innerHTML = '<span>✓ 已呈現雜誌排版</span>';
+    showToast('已完成雜誌沉浸排版 📖');
+  } catch (err) {
+    console.error('Magazine reader error:', err);
+    fullBody.innerHTML = `
+      <div class="modal-loading-box" style="color:#b91c1c; background:#fef2f2;">
+        <div>⚠️ 暫時無法萃取該網站純文字，您可點選下方按鈕直達繁中全頁：</div>
+        <a href="https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}" target="_blank" rel="noopener" style="color:var(--twitter-blue);font-weight:700;margin-top:8px;">開啟 Google 完整網頁翻譯 ↗</a>
+      </div>
+    `;
+    fetchBtn.disabled = false;
+    fetchBtn.innerHTML = '<span>重新嘗試</span>';
+  }
+}
+
+// Markdown 簡易雜誌解析器 (支援標題、段落、圖片、引用)
+function formatMagazineMarkdown(md) {
+  if (!md) return '<p>暫無內容</p>';
+
+  // 移除 Jina 標頭元數據 (Title:, URL Source:, Markdown Content:)
+  let content = md.replace(/^Title:[^\n]*\n/i, '')
+                  .replace(/^URL Source:[^\n]*\n/i, '')
+                  .replace(/^Published Time:[^\n]*\n/i, '')
+                  .replace(/^Markdown Content:[^\n]*\n/i, '')
+                  .trim();
+
+  const lines = content.split('\n');
+  let html = [];
+  let inList = false;
+
+  for (let rawLine of lines) {
+    let line = rawLine.trim();
+    if (!line) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      continue;
+    }
+
+    // 圖片: ![alt](url)
+    const imgMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+    if (imgMatch) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      const alt = imgMatch[1] || '文章配圖';
+      const src = imgMatch[2];
+      html.push(`<figure style="margin:20px 0;"><img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'"><figcaption style="font-size:12.5px;color:#64748b;text-align:center;margin-top:6px;">${alt}</figcaption></figure>`);
+      continue;
+    }
+
+    // 標題
+    if (line.startsWith('### ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push(`<h3>${escapeHtml(line.slice(4))}</h3>`);
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push(`<h2>${escapeHtml(line.slice(3))}</h2>`);
+      continue;
+    }
+    if (line.startsWith('# ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push(`<h2>${escapeHtml(line.slice(2))}</h2>`);
+      continue;
+    }
+
+    // 引用
+    if (line.startsWith('> ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push(`<blockquote>${escapeHtml(line.slice(2))}</blockquote>`);
+      continue;
+    }
+
+    // 清單
+    if (line.startsWith('- ') || line.startsWith('* ')) {
+      if (!inList) { html.push('<ul>'); inList = true; }
+      html.push(`<li>${escapeHtml(line.slice(2))}</li>`);
+      continue;
+    }
+
+    // 一般段落 (過濾雜訊鏈結)
+    if (inList) { html.push('</ul>'); inList = false; }
+
+    // 移除純外鏈廣告導航 (如 [Cookie Policy] 或 [Sign in])
+    if (/^\[[^\]]+\]\([^)]+\)$/.test(line) && line.length < 50) {
+      continue;
+    }
+
+    // 轉義並支援粗體 **text**
+    let formatted = escapeHtml(line);
+    formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    html.push(`<p>${formatted}</p>`);
+  }
+
+  if (inList) html.push('</ul>');
+  return html.join('\n');
+}
+
+function escapeHtml(text) {
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return text.replace(/[&<>"']/g, m => map[m]);
 }
 
 function closeReader() {
