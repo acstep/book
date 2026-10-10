@@ -258,6 +258,42 @@ def fetch_the_batch_issues():
         print(f"The Batch fetch error: {e}")
     return items
 
+def fetch_jiqizhixin_articles():
+    """專屬抓取器：機器之心 (Synced) 頂級 AI 科技媒體"""
+    items = []
+    try:
+        url = 'https://www.jiqizhixin.com/api/article_library/articles?page=1'
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            article_list = data.get('articles', [])
+            for a in article_list[:15]:
+                title = a.get('title', '').strip()
+                slug = a.get('slug') or a.get('id')
+                if not title or not slug:
+                    continue
+                link = f"https://www.jiqizhixin.com/articles/{slug}"
+                desc = (a.get('content') or a.get('description') or f"機器之心專業 AI 技術報導：{title}").strip()
+                cover = a.get('coverImageUrl')
+                pub_date = (a.get('publishedAt') or '最新報導')[:16]
+
+                item_obj = {
+                    'title': title,
+                    'source': '機器之心',
+                    'link': link,
+                    'pubDate': pub_date,
+                    'description': desc,
+                    'category': 'AI'
+                }
+                if cover and cover.startswith('http'):
+                    item_obj['image'] = cover
+                    item_obj['is_real_image'] = True
+
+                items.append(item_obj)
+    except Exception as e:
+        print(f"機器之心 fetch error: {e}")
+    return items
+
 def fetch_feed_items(feed_cfg, cat_key, seen_links):
     """解析標準 RSS 或 Atom 串流"""
     feed_items = []
@@ -337,30 +373,51 @@ def run_fetch():
     ai_candidates = []
     seen_ai_links = set(x.get('link', '') for x in existing_data.get('AI', []))
 
-    # (A) 抓取 Anthropic, Artificial Analysis, The Batch
-    print("Fetching direct editorial sites (Anthropic, Artificial Analysis, The Batch)...")
-    special_items = fetch_anthropic_news() + fetch_artificial_analysis_articles() + fetch_the_batch_issues()
+    # (A) 抓取 Anthropic, Artificial Analysis, The Batch, 機器之心
+    print("Fetching direct editorial sites (Anthropic, Artificial Analysis, The Batch, 機器之心)...")
+    special_items = fetch_anthropic_news() + fetch_artificial_analysis_articles() + fetch_the_batch_issues() + fetch_jiqizhixin_articles()
     for s_item in special_items:
         if s_item['link'] not in seen_ai_links:
             seen_ai_links.add(s_item['link'])
             ai_candidates.append(s_item)
 
     # (B) 並行抓取所有 AI RSS 串流
+    rss_by_source = {}
     with ThreadPoolExecutor(max_workers=8) as executor:
-        feed_tasks = [executor.submit(fetch_feed_items, f_cfg, 'AI', seen_ai_links) for f_cfg in AI_FEEDS]
+        feed_tasks = {executor.submit(fetch_feed_items, f_cfg, 'AI', seen_ai_links): f_cfg['name'] for f_cfg in AI_FEEDS}
         for t in feed_tasks:
-            ai_candidates.extend(t.result())
+            s_name = feed_tasks[t]
+            rss_by_source[s_name] = t.result()
 
-    selected_ai = ai_candidates[:35]
-    print(f"Found {len(ai_candidates)} new AI items, processing top {len(selected_ai)}...")
+    # 確保每個來源（包含 Hugging Face）皆有文章入選，實現均衡多元
+    for s_name, s_items in rss_by_source.items():
+        ai_candidates.extend(s_items[:5])
+
+    # 補充其餘候選文章
+    for s_items in rss_by_source.values():
+        ai_candidates.extend(s_items[5:15])
+
+    selected_ai = ai_candidates[:45]
+    print(f"Found {len(ai_candidates)} new AI items across balanced sources, processing top {len(selected_ai)}...")
     new_ai_processed = []
     if selected_ai:
         with ThreadPoolExecutor(max_workers=8) as executor:
             tasks = [executor.submit(process_single_item, item, 'AI', i) for i, item in enumerate(selected_ai)]
             new_ai_processed = [t.result() for t in tasks]
 
-    results['AI'] = (new_ai_processed + existing_data.get('AI', []))[:150]
-    print(f"✓ [AI] 累積儲存 {len(results['AI'])} 篇 20 大權威直連新聞 (本次新增 {len(new_ai_processed)} 篇)。")
+    # 清理舊歷史中單一來源過多的情況，確保多元性
+    old_ai = existing_data.get('AI', [])
+    # 限制舊歷史中單一來源不超過 20 篇
+    filtered_old_ai = []
+    old_source_counts = {}
+    for item in old_ai:
+        src = item.get('source', '')
+        if old_source_counts.get(src, 0) < 20:
+            filtered_old_ai.append(item)
+            old_source_counts[src] = old_source_counts.get(src, 0) + 1
+
+    results['AI'] = (new_ai_processed + filtered_old_ai)[:150]
+    print(f"✓ [AI] 累積儲存 {len(results['AI'])} 篇 20 大權威直連新聞與機器之心 (本次新增 {len(new_ai_processed)} 篇)。")
 
     # ==========================
     # 2. 抓取 全球財經 (FINANCE)
