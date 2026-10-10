@@ -59,6 +59,13 @@ TECH_FEEDS = [
     {'name': 'Wired', 'url': 'https://www.wired.com/feed/tag/ai/latest/rss'}
 ]
 
+# 全新分類：股市 (Seeking Alpha 權威美股專欄)
+STOCKS_FEEDS = [
+    {'name': 'Seeking Alpha', 'url': 'https://seekingalpha.com/feed.xml'},
+    {'name': 'Seeking Alpha Market Currents', 'url': 'https://seekingalpha.com/market_currents.xml'},
+    {'name': 'Wall St Breakfast', 'url': 'https://seekingalpha.com/tag/wall-st-breakfast.xml'}
+]
+
 # 備援高畫質圖庫
 BACKUP_IMAGES = {
     'AI': [
@@ -81,6 +88,13 @@ BACKUP_IMAGES = {
         'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
         'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80'
+    ],
+    'STOCKS': [
+        'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80'
     ]
 }
 
@@ -274,7 +288,7 @@ def run_fetch():
     out_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'news.json')
 
     # 載入既有乾淨歷史新聞 (排除 news.google.com)
-    existing_data = {'AI': [], 'FINANCE': [], 'TECH': []}
+    existing_data = {'AI': [], 'FINANCE': [], 'TECH': [], 'STOCKS': []}
     if os.path.exists(out_file):
         try:
             with open(out_file, 'r', encoding='utf-8') as f:
@@ -285,7 +299,7 @@ def run_fetch():
                             x for x in loaded[k]
                             if 'news.google.com' not in x.get('link', '')
                         ]
-            print(f"Loaded existing clean history: AI={len(existing_data['AI'])}, FINANCE={len(existing_data['FINANCE'])}, TECH={len(existing_data['TECH'])}")
+            print(f"Loaded existing clean history: AI={len(existing_data['AI'])}, FINANCE={len(existing_data['FINANCE'])}, TECH={len(existing_data['TECH'])}, STOCKS={len(existing_data['STOCKS'])}")
         except Exception as e:
             print(f"Failed to read existing news.json: {e}")
 
@@ -370,10 +384,33 @@ def run_fetch():
     results['TECH'] = (new_tech_processed + existing_data.get('TECH', []))[:150]
     print(f"✓ [TECH] 累積儲存 {len(results['TECH'])} 篇權威直連科技新聞。")
 
+    # ==========================
+    # 4. 抓取 股市 (STOCKS) - Seeking Alpha 三大權威美股專欄
+    # ==========================
+    print("\nFetching category [STOCKS] from Seeking Alpha feeds...")
+    stocks_candidates = []
+    seen_stocks_links = set(x.get('link', '') for x in existing_data.get('STOCKS', []))
+
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        stocks_tasks = [executor.submit(fetch_feed_items, f_cfg, 'STOCKS', seen_stocks_links) for f_cfg in STOCKS_FEEDS]
+        for t in stocks_tasks:
+            stocks_candidates.extend(t.result())
+
+    selected_stocks = stocks_candidates[:35]
+    print(f"Found {len(stocks_candidates)} new STOCKS items, processing top {len(selected_stocks)}...")
+    new_stocks_processed = []
+    if selected_stocks:
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            tasks = [executor.submit(process_single_item, item, 'STOCKS', i) for i, item in enumerate(selected_stocks)]
+            new_stocks_processed = [t.result() for t in tasks]
+
+    results['STOCKS'] = (new_stocks_processed + existing_data.get('STOCKS', []))[:150]
+    print(f"✓ [STOCKS] 累積儲存 {len(results['STOCKS'])} 篇 Seeking Alpha 深度股市外電。")
+
     # 寫入更新 news.json
     with open(out_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    print(f"\n全部完成！已成功整合 20 大權威 AI 網站，海量資料庫寫入 {out_file}")
+    print(f"\n全部完成！已成功整合四大分類 (AI, 財經, 科技, 股市 Seeking Alpha)，海量資料庫寫入 {out_file}")
 
 if __name__ == '__main__':
     run_fetch()

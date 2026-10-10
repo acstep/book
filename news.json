@@ -1,25 +1,25 @@
 {
   "AI": [
     {
-      "title": "GPT-6 和適合所有人的智慧 UI",
+      "title": "GPT-6 and Intelligent UI for everyone",
       "source": "OpenAI",
       "link": "https://openai.com/index/gpt-6-for-everyone",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/5frqtUAWccstAbVrCFraH6/5ae9b6bfbc3f3dff8001ed249812f97d/Intelligent-UI_Art-Card_16x9.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "GPT-6 and Intelligent UI for everyone"
     },
     {
-      "title": "Jump Trading 如何利用 ChatGPT 擴大量化研究規模",
+      "title": "How Jump Trading is scaling quant research with ChatGPT",
       "source": "OpenAI",
       "link": "https://openai.com/index/jump-trading",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/01Nd05HjeHRiEqwJXFhr6Q/5441b03dbcdabb27917814ff14b1374c/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "How Jump Trading is scaling quant research with ChatGPT"
     },
     {
@@ -29,56 +29,56 @@
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/3430T8Aum4BAOFwLEnHQmC/bbc034e46bc5766dc6569183e87fa6df/ai-progress-in-mathematics-social.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Sharing AI progress in mathematics"
     },
     {
-      "title": "透過 Ironclad 促進計算機的使用",
+      "title": "Advancing computer use with Ironclad",
       "source": "OpenAI",
       "link": "https://openai.com/index/advancing-computer-use-with-ironclad",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7MHs3xHafyN62xj8ZblzjX/b0bfb5320a21766be56d761631d18899/oai_ironclad_cua_16x9.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Advancing computer use with Ironclad"
     },
     {
-      "title": "Atlassian 和 OpenAI 擴大合作夥伴關係，將企業知識轉化為行動",
+      "title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action",
       "source": "OpenAI",
       "link": "https://openai.com/index/atlassian-partnership",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/6QbNTCFAGpVGjDLSMfKf9M/e571659e9694e08b73f5e73a01a0682c/atlassian-social-official.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action"
     },
     {
-      "title": "我們對歐盟文本來源規則的處理方法",
+      "title": "Our approach to EU text provenance rules",
       "source": "OpenAI",
       "link": "https://openai.com/index/eu-text-provenance",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7u8k3vMOefnc2eIwqAZlCJ/5e39aad76e07dc260070eae95d545d6f/ChatGPT_Image_5_Oct_2026__18_22_35.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Our approach to EU text provenance rules"
     },
     {
-      "title": "為人們使用人工智慧的方式製作廣告",
+      "title": "Building advertising for the way people use AI",
       "source": "OpenAI",
       "link": "https://openai.com/index/new-chatgpt-ads-format-and-measurement",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/rK0Bn1sDSa03vTiJvEqEk/e693b91273247f332181de385845fa52/building-advertising-for-the-way-people-use-ai-social.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Building advertising for the way people use AI"
     },
     {
-      "title": "GPT-6 系列模型指南",
+      "title": "A model guide for the GPT-6 family",
       "source": "OpenAI",
       "link": "https://openai.com/index/practical-guide-building-gpt-6",
       "pubDate": "",
@@ -89,117 +89,117 @@
       "original_title": "A model guide for the GPT-6 family"
     },
     {
-      "title": "Chatham 透過 OpenAI 擴展其資本市場專業知識",
+      "title": "Chatham scales its capital markets expertise with OpenAI",
       "source": "OpenAI",
       "link": "https://openai.com/index/chatham-financial",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/5YyV7pXaAJJDcGDHvPniAF/4f73936c51d46e5bf8941e13f06987b2/chatham-financial-social-getty-texture.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Chatham scales its capital markets expertise with OpenAI"
     },
     {
-      "title": "永恆的補充",
+      "title": "The eternal complement",
       "source": "OpenAI",
       "link": "https://openai.com/index/the-eternal-complement",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/2lnidMsGW3gfP6p4fYJZTg/be8ebadd2bf9e9d83adea7a6f28f0501/eternal-complement-seo-white-preview.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "The eternal complement"
     },
     {
-      "title": "艾伯森公司如何從內部重新構想零售業",
+      "title": "How Albertsons Companies is reimagining retail from the inside out",
       "source": "OpenAI",
       "link": "https://openai.com/index/albertsons-reimagining-retail",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/6sZopZBu8aHeeYeb8H6IS1/945a5ed2fcd3a837554c8ac49a38cdf6/how-albertsons-companies-is-reimagining-retail-from-the-inside-out-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "How Albertsons Companies is reimagining retail from the inside out"
     },
     {
-      "title": "透過 ChatGPT Work，The Den 每周可以騰出 10-15 小時來發展",
+      "title": "The Den frees up 10-15 hours a week to grow with ChatGPT Work",
       "source": "OpenAI",
       "link": "https://openai.com/index/the-den-family-social",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/2LBeQvZxob9E44kvUBuP4u/bf9887c20e840ecd0362d8e93e98c31d/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "The Den frees up 10-15 hours a week to grow with ChatGPT Work"
     },
     {
-      "title": "破壞協調的模型蒸餾活動",
+      "title": "Disrupting a coordinated model-distillation campaign",
       "source": "OpenAI",
       "link": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7MP5Bq8wKRpAAnnhqfdA8o/3ca1f00ae7ec16c5a569eb6195e24c90/disrupting-a-coordinated-model-distillation-campaign-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Disrupting a coordinated model-distillation campaign"
     },
     {
-      "title": "幫助小型企業將人工智慧發揮作用",
+      "title": "Helping small businesses put AI to work",
       "source": "OpenAI",
       "link": "https://openai.com/index/helping-small-businesses-put-ai-to-work",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/1rewZcU5SqdsiUKj7Q6fCx/e82271bc1df80e3f2d5f9cfcd82a91fa/helping-small-businesses-put-ai-to-work-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Helping small businesses put AI to work"
     },
     {
-      "title": "DevDay 2026 回顧",
+      "title": "DevDay 2026 Recap",
       "source": "OpenAI",
       "link": "https://openai.com/index/devday-2026-recap",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/6elORm6Tf9SptdH3mlnJBW/a0bea759a911cd9f04afe135835063bc/DevDay_Blog_ArtCard_16x9.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "DevDay 2026 Recap"
     },
     {
-      "title": "GPT-6.1 Sol 簡介",
+      "title": "Introducing GPT-6.1 Sol",
       "source": "OpenAI",
       "link": "https://openai.com/index/introducing-gpt-6-1-sol",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/1Xa7inzcCfsGE5aV3QqeN3/4f3689ae92e04b18569f9eaf919e7174/GPT-6-1-Sol_16x9.png",
+      "is_real_image": true,
       "original_title": "Introducing GPT-6.1 Sol"
     },
     {
-      "title": "介紹點",
+      "title": "Introducing dots",
       "source": "OpenAI",
       "link": "https://openai.com/index/introducing-dots",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/3SQQ9jqSm3aytzUPKuNS3X/e30d9ff756987b178e2b141de5c64a35/Art_Card___Landscape___16_9___1920_1080.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Introducing dots"
     },
     {
-      "title": "我們如何為澳洲做得更好",
+      "title": "How we will do better for Australia",
       "source": "OpenAI",
       "link": "https://openai.com/index/how-we-will-do-better-for-australia",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/27qbrKJfTn2i8yoYkoNM3M/976d3d86067d405f4b43d93cb6dc632e/how_we_will_do_better_for_australia.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "How we will do better for Australia"
     },
     {
-      "title": "前沿人工智慧訓練的安全案例",
+      "title": "Towards safety cases for frontier AI training",
       "source": "OpenAI",
       "link": "https://openai.com/index/towards-safety-cases-for-frontier-ai-training",
       "pubDate": "",
@@ -210,179 +210,179 @@
       "original_title": "Towards safety cases for frontier AI training"
     },
     {
-      "title": "Lenfest 研究所透過擴大 OpenAI 支持發展具有里程碑意義的項目",
+      "title": "The Lenfest Institute grows landmark program with expanded OpenAI support",
       "source": "OpenAI",
       "link": "https://openai.com/index/lenfest-ai-collaborative-expansion",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/6txA4ODTKx7m0Lm7PZhV2j/f0f1322b05b78fb0b33d5dae4920aa00/lenfest-september-seo-white.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "The Lenfest Institute grows landmark program with expanded OpenAI support"
     },
     {
-      "title": "您是 Codex 原版嗎？",
+      "title": "Are you a Codex Original?",
       "source": "OpenAI",
       "link": "https://openai.com/form/codex-originals",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/1tkRhsM6NQY70u82qQSY9v/778870fcb88ee191b3a731c6eec65c21/Steel_SEO_1.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Are you a Codex Original?"
     },
     {
-      "title": "Basis 使用 GPT-6 Astra 完成稅務工作簿的速度提高了 2 倍",
+      "title": "Basis completes a tax workbook 2x faster with GPT-6 Astra",
       "source": "OpenAI",
       "link": "https://openai.com/index/basis-tax-workbook-with-astra",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7hNx4cjhiG3ifg8H6lgtL3/fee5716218aaad57f74c8581480bef9d/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Basis completes a tax workbook 2x faster with GPT-6 Astra"
     },
     {
-      "title": "透過 Codex，Proaction 將銷售額提高了 60%，並節省了 75 多個小時",
+      "title": "Proaction boosts sales 60% and saves 75+ hours with Codex",
       "source": "OpenAI",
       "link": "https://openai.com/index/proaction",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/2ZDFcePalT1BpkNxHdwpnS/521705b27328ebf7f7449136dcd428c2/proaction-option-a-seo-og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Proaction boosts sales 60% and saves 75+ hours with Codex"
     },
     {
-      "title": "Lowe’s 透過 OpenAI 回答了數百萬個居家裝潢問題",
+      "title": "Lowe’s answers millions of home improvement questions with OpenAI",
       "source": "OpenAI",
       "link": "https://openai.com/index/lowes",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/4eaOt2sr4dIunauWVhVYkg/6d3e28e21b1a981937dec1731bbb4294/oai_Lowe_s_SEO.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Lowe’s answers millions of home improvement questions with OpenAI"
     },
     {
-      "title": "Wayfair 透過 OpenAI 提高目錄準確性和支援速度",
+      "title": "Wayfair boosts catalog accuracy and support speed with OpenAI",
       "source": "OpenAI",
       "link": "https://openai.com/index/wayfair",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/2BwLsAc9CDgCMWPnvMG6zT/88486652ebb56e9410a9949bfb4938f8/oai_wayfair_SEO.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Wayfair boosts catalog accuracy and support speed with OpenAI"
     },
     {
-      "title": "OpenAI 學院兩年",
+      "title": "Two years of OpenAI Academy",
       "source": "OpenAI",
       "link": "https://openai.com/index/two-years-of-openai-academy",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/6A4AcxrMdo5oOri7Wm8qNg/34228cf221e3af874539412f71b28a44/two-years-of-openai-academy-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Two years of OpenAI Academy"
     },
     {
-      "title": "OpenAI 將網路存取擴展到烏克蘭用於民防",
+      "title": "OpenAI extends cyber access to Ukraine for civilian defense",
       "source": "OpenAI",
       "link": "https://openai.com/index/openai-extends-cyber-access-to-ukraine-for-civilian-defense",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/5TR3Q7ZcZJbqxGHYfksNSt/de1f57d45927c818631c58ffedb01346/openai-extends-cyber-access-to-ukraine-for-civilian-defense-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "OpenAI extends cyber access to Ukraine for civilian defense"
     },
     {
-      "title": "Ringg 的 AI 代理透過 OpenAI 解決了高達 65% 的客戶呼叫",
+      "title": "Ringg’s AI agents resolve up to 65% of customer calls with OpenAI",
       "source": "OpenAI",
       "link": "https://openai.com/index/ringg",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/773XsnwO9QT1z6x55Ku0BG/678970983193f3c32961714f6eb63320/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Ringg’s AI agents resolve up to 65% of customer calls with OpenAI"
     },
     {
-      "title": "invideo 如何使用 GPT‑6 Astra 將色彩分級提高 3 倍",
+      "title": "How invideo improves color grading 3x with GPT‑6 Astra",
       "source": "OpenAI",
       "link": "https://openai.com/index/invideo-builds-with-gpt-6-astra",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7u3JLdLZ5U3DIRSRzYmCvQ/3e3b52a6a13808aa7cf360628410f5f7/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "How invideo improves color grading 3x with GPT‑6 Astra"
     },
     {
-      "title": "Harvey 透過 GPT-6 Astra 將法律背景轉化為更強大的草案",
+      "title": "Harvey turns legal context into stronger drafts with GPT-6 Astra",
       "source": "OpenAI",
       "link": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/1fGwmofg1NcZrX5mgNL2f2/b88c7bf0b4fc2daeff9ec92264b0afcc/og.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Harvey turns legal context into stronger drafts with GPT-6 Astra"
     },
     {
-      "title": "薩姆·奧爾特曼在聯合國安理會的演講",
+      "title": "Sam Altman’s remarks at the United Nations Security Council",
       "source": "OpenAI",
       "link": "https://openai.com/index/sam-altman-un-security-council-remarks",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/MD52BCLFjD4H7Kf1wiCnz/56e1b7f4a0eaa3f90e62d36799987269/sam-altman-s-remarks-at-the-united-nations-security-council-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Sam Altman’s remarks at the United Nations Security Council"
     },
     {
-      "title": "心理健康基準簡介",
+      "title": "Introducing MentalHealthBench",
       "source": "OpenAI",
       "link": "https://openai.com/index/introducing-mentalhealthbench",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/5KrG4TnUmqAhgDo0zdLrUk/5dda4aa9e8fe694141b9fff6926ca82e/SEO_Card.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Introducing MentalHealthBench"
     },
     {
-      "title": "ChatGPT 廣告擴展到東南亞和台灣",
+      "title": "ChatGPT Ads expands to Southeast Asia and Taiwan",
       "source": "OpenAI",
       "link": "https://openai.com/index/chatgpt-ads-expands-southeast-asia-taiwan",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/7FJ6xwUhzfqnyoSn9ciPcS/2f477db82efadb6e10ace70da6498bb3/chatgpt-ads-expands-to-southeast-asia-and-taiwan-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "ChatGPT Ads expands to Southeast Asia and Taiwan"
     },
     {
-      "title": "Airbnb 擴大了對 GPT-6 Astra 和 OpenAI 前沿模型的訪問",
+      "title": "Airbnb widens access to GPT-6 Astra and OpenAI frontier models",
       "source": "OpenAI",
       "link": "https://openai.com/index/airbnb-gpt-6-astra",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/4EjU7S9AFpxyMlaAUQAoiu/9ad3eb003d32e0f6857f2e0e41d40e84/airbnb-widens-access-to-gpt-6-astra-and-openai-frontier-models-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Airbnb widens access to GPT-6 Astra and OpenAI frontier models"
     },
     {
-      "title": "Grab 和 OpenAI 為東南亞帶來實用的人工智慧技能",
+      "title": "Grab and OpenAI bring practical AI skills to Southeast Asia",
       "source": "OpenAI",
       "link": "https://openai.com/index/grab-openai-ai-skills-southeast-asia",
       "pubDate": "",
       "description": "OpenAI 最新發布之專業報導與深度分析。",
       "category": "AI",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://images.ctfassets.net/kftzwdyauwt9/5C2RDQgNmNWdxbJAIEd8fb/7aa15f20784515a3d6d3348fd1e2b4a3/grab-and-openai-bring-practical-ai-skills-to-southeast-asia-seo.png?w=1600&h=900&fit=fill",
+      "is_real_image": true,
       "original_title": "Grab and OpenAI bring practical AI skills to Southeast Asia"
     },
     {
@@ -1356,7 +1356,7 @@
   ],
   "FINANCE": [
     {
-      "title": "造雨者：用於播種雲的無人機",
+      "title": "Rainmakers: The drones used to seed clouds",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c64g71j4lgyjo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1367,7 +1367,7 @@
       "original_title": "Rainmakers: The drones used to seed clouds"
     },
     {
-      "title": "人工智慧告訴農民何時收割",
+      "title": "The AI telling farmers when to harvest",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cgk53dkmyxko?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1378,7 +1378,7 @@
       "original_title": "The AI telling farmers when to harvest"
     },
     {
-      "title": "新創企業希望將電池製造返回美國",
+      "title": "The start-ups hoping to return battery making to the US",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cvgyexx4g8ro?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1389,7 +1389,7 @@
       "original_title": "The start-ups hoping to return battery making to the US"
     },
     {
-      "title": "X-plane：無人機新時代需要它們嗎？",
+      "title": "X-planes: Are they needed in the new era of drones?",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c9q92x359xdo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1400,7 +1400,7 @@
       "original_title": "X-planes: Are they needed in the new era of drones?"
     },
     {
-      "title": "美國石油之都如何迎來太陽能熱潮",
+      "title": "How the oil capital of the US welcomed a solar power boom",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cmx2zxv6936zo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1411,7 +1411,7 @@
       "original_title": "How the oil capital of the US welcomed a solar power boom"
     },
     {
-      "title": "西班牙在多個方面應對氣候變化",
+      "title": "Spain battles climate change on several fronts",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cwg59g3vz564o?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1422,7 +1422,7 @@
       "original_title": "Spain battles climate change on several fronts"
     },
     {
-      "title": "訓練機器人的虛擬世界",
+      "title": "The virtual worlds where robots are trained",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c79g0j3d4q9o?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1433,7 +1433,7 @@
       "original_title": "The virtual worlds where robots are trained"
     },
     {
-      "title": "您會從您最喜歡的科技公司購買品牌服飾嗎？",
+      "title": "Would you buy branded clothing from your favourite tech firm?",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cgqd9zkkvlyo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1444,7 +1444,7 @@
       "original_title": "Would you buy branded clothing from your favourite tech firm?"
     },
     {
-      "title": "討論高價值居民的貢獻",
+      "title": "Contribution of high value residents discussed",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c6ly0vxd2v9eo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1455,7 +1455,7 @@
       "original_title": "Contribution of high value residents discussed"
     },
     {
-      "title": "抗議者將西班牙住房危機歸咎於“禿鷹基金”",
+      "title": "Protesters blame 'vulture funds' for Spain's housing crisis",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c3j4790elkx7o?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1466,7 +1466,7 @@
       "original_title": "Protesters blame 'vulture funds' for Spain's housing crisis"
     },
     {
-      "title": "我的家鄉表明大街必須改變或消亡",
+      "title": "My hometown shows that high streets have to change or die",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/crd689de186jo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1477,7 +1477,7 @@
       "original_title": "My hometown shows that high streets have to change or die"
     },
     {
-      "title": "歐洲汽車製造商正陷入危機。戰爭的威脅會拯救他們嗎？",
+      "title": "Europe's car makers are in crisis. Will the threat of war rescue them?",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c6vgyq598k9po?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1488,7 +1488,7 @@
       "original_title": "Europe's car makers are in crisis. Will the threat of war rescue them?"
     },
     {
-      "title": "航空業面臨更炎熱、暴風雨更大的天空——乘客可能必須接受更多的干擾",
+      "title": "Aviation faces hotter, stormier skies – and passengers might have to accept more disruption",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cm274p8m88lo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1499,7 +1499,7 @@
       "original_title": "Aviation faces hotter, stormier skies – and passengers might have to accept more disruption"
     },
     {
-      "title": "為什麼英國在如何處理電動滑板車上猶豫不決",
+      "title": "Why the UK is dithering over what to do about e-scooters",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/cn4nvn9w00no?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1510,7 +1510,7 @@
       "original_title": "Why the UK is dithering over what to do about e-scooters"
     },
     {
-      "title": "為什麼 Z 世代正在規劃沒有國家退休金的生活",
+      "title": "Why Gen Z are planning for life without a state pension",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/articles/c8e2yp1gg37o?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1521,7 +1521,7 @@
       "original_title": "Why Gen Z are planning for life without a state pension"
     },
     {
-      "title": "存錢罐",
+      "title": "Money Box",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/sounds/play/m0032qlk?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1532,7 +1532,7 @@
       "original_title": "Money Box"
     },
     {
-      "title": "為什麼有這麼多體育訂閱？",
+      "title": "Why are there so many sports subscriptions?",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/sport/football/videos/cj20vkpd61kqo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1543,7 +1543,7 @@
       "original_title": "Why are there so many sports subscriptions?"
     },
     {
-      "title": "商報",
+      "title": "Business Daily",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/sounds/play/w3ct8g9x?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1554,7 +1554,7 @@
       "original_title": "Business Daily"
     },
     {
-      "title": "約會後多久你會談論你的薪水？",
+      "title": "How soon into dating do you talk about your salary?",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/videos/cry4x353vz2eo?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1565,7 +1565,7 @@
       "original_title": "How soon into dating do you talk about your salary?"
     },
     {
-      "title": "新的電子菸稅讓我把電子煙換成飛鏢",
+      "title": "New vape tax made me swap e-cigs for dartboards",
       "source": "BBC Business",
       "link": "https://www.bbc.co.uk/news/videos/cmd6dv1446lno?at_medium=RSS&at_campaign=rss",
       "pubDate": "",
@@ -1576,7 +1576,7 @@
       "original_title": "New vape tax made me swap e-cigs for dartboards"
     },
     {
-      "title": "是什麼拖累了人工智慧的發展效率？ 「驗證稅」。",
+      "title": "What’s Dragging Down A.I. Efficiency? The ‘Verification Tax.’",
       "source": "NYTimes Business",
       "link": "https://www.nytimes.com/2026/10/10/business/dealbook/ai-verification-tax-rework.html",
       "pubDate": "",
@@ -1587,7 +1587,7 @@
       "original_title": "What’s Dragging Down A.I. Efficiency? The ‘Verification Tax.’"
     },
     {
-      "title": "大爭議顛覆了關於微觀影片的競賽",
+      "title": "Big Controversy Upends a Contest About Microscopic Videos",
       "source": "NYTimes Business",
       "link": "https://www.nytimes.com/2026/10/09/science/nikon-microscopic-videos-ai.html",
       "pubDate": "",
@@ -1598,7 +1598,7 @@
       "original_title": "Big Controversy Upends a Contest About Microscopic Videos"
     },
     {
-      "title": "Target表示，由於停車場使用引發軒然大波，該公司不與ICE合作",
+      "title": "Target Says It’s Not Working With ICE Amid Uproar Over Parking Lot Use",
       "source": "NYTimes Business",
       "link": "https://www.nytimes.com/2026/10/09/nyregion/target-parking-lot-ice.html",
       "pubDate": "",
@@ -1609,7 +1609,7 @@
       "original_title": "Target Says It’s Not Working With ICE Amid Uproar Over Parking Lot Use"
     },
     {
-      "title": "川普在中期選舉前向歐巴馬醫改「退款」支票",
+      "title": "Trump Sends Obamacare ‘Refund’ Checks Ahead of Midterm Elections",
       "source": "NYTimes Business",
       "link": "https://www.nytimes.com/2026/10/09/business/trump-obamacare-refund-checks.html",
       "pubDate": "",
@@ -1620,7 +1620,7 @@
       "original_title": "Trump Sends Obamacare ‘Refund’ Checks Ahead of Midterm Elections"
     },
     {
-      "title": "私人醫療保險計劃正在提高成本並迫使數百萬人尋找新的保險",
+      "title": "Private Medicare Plans Are Raising Costs And Forcing Millions To Find New Insurance",
       "source": "NYTimes Business",
       "link": "https://www.nytimes.com/2026/10/09/business/medicare-private-health-care-costs.html",
       "pubDate": "",
@@ -2491,7 +2491,7 @@
   ],
   "TECH": [
     {
-      "title": "人類與關在籠子裡的「終結者」機器人。加州稱其為非法。",
+      "title": "Man vs. ‘Terminator’-Like Robot in a Cage. California Called It Illegal.",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/08/technology/human-robot-cage-fights-california-rek.html",
       "pubDate": "",
@@ -2502,7 +2502,7 @@
       "original_title": "Man vs. ‘Terminator’-Like Robot in a Cage. California Called It Illegal."
     },
     {
-      "title": "為什麼選擇人工智慧特工變得流氓",
+      "title": "Why A.I. Agents Are Going Rogue",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/video/technology/100000011159494/why-ai-agents-are-going-rogue.html",
       "pubDate": "",
@@ -2513,7 +2513,7 @@
       "original_title": "Why A.I. Agents Are Going Rogue"
     },
     {
-      "title": "人工智慧.騙取數百萬版稅的音樂詐騙犯被判處 18 個月監禁",
+      "title": "A.I. Music Fraudster Who Drew Millions in Royalties Is Sentenced to 18 Months",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/07/arts/music/ai-music-fraud-royalties-sentence.html",
       "pubDate": "",
@@ -2524,7 +2524,7 @@
       "original_title": "A.I. Music Fraudster Who Drew Millions in Royalties Is Sentenced to 18 Months"
     },
     {
-      "title": "能源公司試圖從舊核電廠榨取更多電力",
+      "title": "Energy Firms Try to Squeeze More Power Out of Old Nuclear Plants",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/06/climate/nuclear-power-plant-google-data-centers.html",
       "pubDate": "",
@@ -2535,7 +2535,7 @@
       "original_title": "Energy Firms Try to Squeeze More Power Out of Old Nuclear Plants"
     },
     {
-      "title": "在與美國的競爭中，中國努力招募外國人工智慧研究人員",
+      "title": "In Race With U.S., China Struggles to Recruit Foreign A.I. Researchers",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/06/science/china-ai-research-recruitment.html",
       "pubDate": "",
@@ -2546,7 +2546,7 @@
       "original_title": "In Race With U.S., China Struggles to Recruit Foreign A.I. Researchers"
     },
     {
-      "title": "戰爭機器：E-Day 懷舊且視覺效果豐富",
+      "title": "Gears of War: E-Day Is Nostalgic With Rich Visuals",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/06/arts/gears-of-war-e-day-review.html",
       "pubDate": "",
@@ -2557,7 +2557,7 @@
       "original_title": "Gears of War: E-Day Is Nostalgic With Rich Visuals"
     },
     {
-      "title": "韓國調查人工智慧的可能使用銀行遭受駭客攻擊",
+      "title": "South Korea Investigates Possible Use of A.I. in Hackings on Its Banks",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/06/world/asia/south-korea-banks-hacked-ai.html",
       "pubDate": "",
@@ -2568,7 +2568,7 @@
       "original_title": "South Korea Investigates Possible Use of A.I. in Hackings on Its Banks"
     },
     {
-      "title": "在充滿機器人的公園度過一天後人類的複雜感受",
+      "title": "Mixed Human Feelings After a Day at a Park Full of Robots",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/05/world/asia/south-korea-ai-humanoid-robot-park.html",
       "pubDate": "",
@@ -2579,7 +2579,7 @@
       "original_title": "Mixed Human Feelings After a Day at a Park Full of Robots"
     },
     {
-      "title": "美國太陽能板製造商試圖透過技術飛躍超越中國",
+      "title": "US Solar Panel Makers Try to Catch China With a Big Leap in Technology",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/05/business/energy-environment/tandem-solar-panels-us-china.html",
       "pubDate": "",
@@ -2590,7 +2590,7 @@
       "original_title": "US Solar Panel Makers Try to Catch China With a Big Leap in Technology"
     },
     {
-      "title": "嬰兒有意識嗎？",
+      "title": "Are Babies Conscious?",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/05/science/consciousness-brain-babies.html",
       "pubDate": "",
@@ -2601,7 +2601,7 @@
       "original_title": "Are Babies Conscious?"
     },
     {
-      "title": "法院對 A.I. 作出判決播放受害者“原諒”兇手的視頻",
+      "title": "Court Tosses ​​Sentence After A.I. Video of Victim ‘Forgiving’ His Killer Is Played",
       "source": "NYTimes Tech",
       "link": "https://www.nytimes.com/2026/10/04/us/manslaughter-conviction-overturned-ai-video-statement.html",
       "pubDate": "",
@@ -2612,7 +2612,7 @@
       "original_title": "Court Tosses ​​Sentence After A.I. Video of Victim ‘Forgiving’ His Killer Is Played"
     },
     {
-      "title": "與世界合一？對迷幻藥改變的大腦的新認識。",
+      "title": "One with the world? A new look at brains transformed by psychedelics.",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/science/2026/10/the-psychedelic-brain-looks-like-chaos-underneath-theres-order/",
       "pubDate": "",
@@ -2623,7 +2623,7 @@
       "original_title": "One with the world? A new look at brains transformed by psychedelics."
     },
     {
-      "title": "來自西班牙的尼安德特人木製工具被發現保存在石頭中",
+      "title": "Neanderthal wooden tools from Spain found preserved in stone",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/science/2026/10/neanderthal-wooden-tools-from-spain-found-preserved-in-stone/",
       "pubDate": "",
@@ -2634,7 +2634,7 @@
       "original_title": "Neanderthal wooden tools from Spain found preserved in stone"
     },
     {
-      "title": "烏克蘭無人機摧毀了「俄羅斯谷歌」的人工智慧資料中心",
+      "title": "Ukraine’s drones knock out AI data center belonging to \"Russia’s Google\"",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/gadgets/2026/10/ukraines-drones-knock-out-ai-data-center-belonging-to-russias-google/",
       "pubDate": "",
@@ -2645,7 +2645,7 @@
       "original_title": "Ukraine’s drones knock out AI data center belonging to \"Russia’s Google\""
     },
     {
-      "title": "30 台「過時」Mac Mini 的 Cray-1 超級電腦複製品",
+      "title": "A Cray-1 supercomputer replica from 30 \"obsolete\" Mac Minis",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/gadgets/2026/10/a-cray-1-supercomputer-replica-from-30-obsolete-mac-minis/",
       "pubDate": "",
@@ -2656,7 +2656,7 @@
       "original_title": "A Cray-1 supercomputer replica from 30 \"obsolete\" Mac Minis"
     },
     {
-      "title": "美國太空總署向業界發出期待已久的私人太空站呼籲",
+      "title": "NASA issues long-awaited call to industry for private space stations",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/space/2026/10/nasa-issues-long-awaited-call-to-industry-for-private-space-stations/",
       "pubDate": "",
@@ -2700,7 +2700,7 @@
       "original_title": "Outrage grows as CDC reportedly poised to fund \"unethical\" vaccine trial"
     },
     {
-      "title": "PC 出貨量下降 20.1%，創 2023 年第一季以來“最大跌幅”",
+      "title": "PC shipments fall 20.1 percent in “sharpest decline” since Q1 2023",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/information-technology/2026/10/pc-shipments-fall-20-1-percent-in-sharpest-decline-since-q1-2023/",
       "pubDate": "",
@@ -2744,7 +2744,7 @@
       "original_title": "Starlink spectrum deal boosts Musk plan to beat AT&T, T-Mobile, and Verizon"
     },
     {
-      "title": "微軟被禁止資助外籍勞工取得美國居留權",
+      "title": "Microsoft barred from sponsoring foreign workers for US residency",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/tech-policy/2026/10/trump-administration-targets-microsoft-in-new-immigration-crackdown/",
       "pubDate": "",
@@ -2755,7 +2755,7 @@
       "original_title": "Microsoft barred from sponsoring foreign workers for US residency"
     },
     {
-      "title": "火箭報告：罕見的獵鷹 9 號擦洗；現在是火神大放異彩的時候嗎？",
+      "title": "Rocket Report: A rare Falcon 9 scrub; is it just about Vulcan's time to shine?",
       "source": "Ars Technica",
       "link": "https://arstechnica.com/space/2026/10/rocket-report-a-rare-falcon-9-scrub-is-it-just-about-vulcans-time-to-shine/",
       "pubDate": "",
@@ -3622,6 +3622,393 @@
       "image": "https://247wallst.com/wp-content/uploads/2024/06/Tsmc.svg_.png",
       "is_real_image": true,
       "original_title": "One of the Most Important AI Stocks Isn’t Nvidia. It’s TSMC"
+    }
+  ],
+  "STOCKS": [
+    {
+      "title": "Krystal Biotech: Vyjuvek's Success Is Becoming Its Growth Problem (Downgrade)",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953266-krystal-biotech-vyjuveks-success-is-becoming-its-growth-problem-downgrade?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Krystal Biotech: Vyjuvek's Success Is Becoming Its Growth Problem (Downgrade)"
+    },
+    {
+      "title": "Zeta Global: The Shares Have Doubled, And I Remain Bullish",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953208-zeta-global-the-shares-have-doubled-and-i-remain-bullish?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2265889718/image_2265889718.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Zeta Global: The Shares Have Doubled, And I Remain Bullish"
+    },
+    {
+      "title": "Super Micro: The $60 Billion Warning Investors Ignore",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953265-super-micro-the-60-billion-warning-investors-ignore?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1828680033/image_1828680033.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Super Micro: The $60 Billion Warning Investors Ignore"
+    },
+    {
+      "title": "Rivian: R2 Is A Winner (Rating Upgrade)",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953264-rivian-r2-is-a-winner-rating-upgrade?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1397570049/image_1397570049.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Rivian: R2 Is A Winner (Rating Upgrade)"
+    },
+    {
+      "title": "Starbucks To Acquire Chipotle? Neither Stock Is A Buy Now",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953209-starbucks-to-acquire-chipotle-neither-stock-a-buy-now?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2201814990/image_2201814990.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Starbucks To Acquire Chipotle? Neither Stock Is A Buy Now"
+    },
+    {
+      "title": "Lumentum: Sold Out Through 2029, But Something Bigger Is Coming",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953263-lumentum-sold-out-through-2029-but-something-bigger-is-coming?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Lumentum: Sold Out Through 2029, But Something Bigger Is Coming"
+    },
+    {
+      "title": "5 Relatively Secure And Cheap Dividend Stocks, Yields Up To 8% Plus (October 2026)",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4952616-5-relatively-secure-and-cheap-dividend-stocks-yields-8-percent-october-2026?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1249993252/image_1249993252.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "5 Relatively Secure And Cheap Dividend Stocks, Yields Up To 8% Plus (October 2026)"
+    },
+    {
+      "title": "If Small Value Slides, The Battleground Is Clear",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953247-if-small-value-slides-the-battleground-is-clear?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2241787139/image_2241787139.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "If Small Value Slides, The Battleground Is Clear"
+    },
+    {
+      "title": "Hecla Mining: I See Better Value Elsewhere In Precious Metals",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953262-hecla-mining-i-see-better-value-elsewhere-in-precious-metals?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Hecla Mining: I See Better Value Elsewhere In Precious Metals"
+    },
+    {
+      "title": "Taiwan's Power Problem Is America's Opportunity",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953261-taiwans-power-problem-is-americas-opportunity?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Taiwan's Power Problem Is America's Opportunity"
+    },
+    {
+      "title": "Avoid Bonds, Buy Rate-Sensitive Stocks And Preferred Stocks Instead",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953124-avoid-bonds-buy-rate-sensitive-stocks-and-preferred-stocks-instead?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1804111795/image_1804111795.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Avoid Bonds, Buy Rate-Sensitive Stocks And Preferred Stocks Instead"
+    },
+    {
+      "title": "Vanguard Offers U.S. Treasury ETFs Across The Maturity Spectrum: Stay Short",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953259-vanguard-offers-us-treasury-etfs-across-the-maturity-spectrum-stay-short?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2210598237/image_2210598237.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Vanguard Offers U.S. Treasury ETFs Across The Maturity Spectrum: Stay Short"
+    },
+    {
+      "title": "NextEra Energy: Extreme Quality That Is Rarely This Cheap",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4952859-nextera-energy-extreme-quality-that-is-rarely-this-cheap?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "NextEra Energy: Extreme Quality That Is Rarely This Cheap"
+    },
+    {
+      "title": "Weekly Indicators: AI-Related Positives Continue To Outweigh Oil And Interest Rate Negatives",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953183-weekly-indicators-ai-related-positives-outweigh-oil-and-interest-rate-negatives?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/682742358/image_682742358.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Weekly Indicators: AI-Related Positives Continue To Outweigh Oil And Interest Rate Negatives"
+    },
+    {
+      "title": "A Potential New Market Threat: The IPO Window Closing",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953220-potential-new-market-threat-ipo-window-closing?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "A Potential New Market Threat: The IPO Window Closing"
+    },
+    {
+      "title": "Nidec Still Looks Expensive After Its Accounting Reset",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953258-nidec-still-looks-expensive-after-its-accounting-reset?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Nidec Still Looks Expensive After Its Accounting Reset"
+    },
+    {
+      "title": "Permian Resources: Good Management Is Always Cheap",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953257-permian-resources-good-management-always-cheap?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Permian Resources: Good Management Is Always Cheap"
+    },
+    {
+      "title": "October 2026 Trading Outlook: Stock Market, Bonds, Fiscal Flows, And Interest Rates",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953255-october-2026-trading-outlook-stock-market-bonds-fiscal-flows-and-interest-rates?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "October 2026 Trading Outlook: Stock Market, Bonds, Fiscal Flows, And Interest Rates"
+    },
+    {
+      "title": "Rising Interest Rates: A Tale Of Two Stock Markets",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953254-rising-interest-rates-a-tale-of-two-stock-markets?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Rising Interest Rates: A Tale Of Two Stock Markets"
+    },
+    {
+      "title": "Happen: Back In The Buy Zone",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953252-happen-back-in-buy-zone?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Happen: Back In The Buy Zone"
+    },
+    {
+      "title": "Pepsi: Near 5% Yield And 15x P/E Compelling, But North America Concerns Me",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4952998-pepsi-near-5-percent-yield-and-15x-p-e-compelling-but-north-america-concerns-me?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Pepsi: Near 5% Yield And 15x P/E Compelling, But North America Concerns Me"
+    },
+    {
+      "title": "Micron: Winter Is Coming (Rating Upgrade)",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953251-micron-winter-is-coming-rating-upgrade?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Micron: Winter Is Coming (Rating Upgrade)"
+    },
+    {
+      "title": "Union Pacific: Not Too Late To Buy Now",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953230-union-pacific-not-too-late-to-buy-now?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2200737542/image_2200737542.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Union Pacific: Not Too Late To Buy Now"
+    },
+    {
+      "title": "Applied Industrial Technologies: Strong Execution, Limited Upside At This Valuation",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953250-applied-industrial-technologies-strong-execution-limited-upside-at-this-valuation?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Applied Industrial Technologies: Strong Execution, Limited Upside At This Valuation"
+    },
+    {
+      "title": "The More REITs Drop, The More I Buy",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4952048-the-more-reits-drop-the-more-i-buy?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2169530247/image_2169530247.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "The More REITs Drop, The More I Buy"
+    },
+    {
+      "title": "ExxonMobil Holdings Corporation (XOM) Presents at Barclays 40th Annual Energy-Power Conference - Slideshow",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953260-exxonmobil-holdings-corporation-xom-presents-at-barclays-40th-annual-energy-power-conference?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "ExxonMobil Holdings Corporation (XOM) Presents at Barclays 40th Annual Energy-Power Conference - Slideshow"
+    },
+    {
+      "title": "Alphabet Is A Fortress Stock, Built To Survive",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953249-alphabet-is-a-fortress-stock-built-to-survive?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/2204764870/image_2204764870.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Alphabet Is A Fortress Stock, Built To Survive"
+    },
+    {
+      "title": "2 Dividend Kings Looking Dirt Cheap",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953198-2-dividend-kings-looking-dirt-cheap?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1345341921/image_1345341921.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "2 Dividend Kings Looking Dirt Cheap"
+    },
+    {
+      "title": "Broadcom: Growth Reliance On OpenAI And Anthropic Becomes Concerning",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953248-broadcom-growth-reliance-on-openai-and-anthropic-becomes-concerning?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1643360144/image_1643360144.jpg?io=getty-c-w1536",
+      "is_real_image": true,
+      "original_title": "Broadcom: Growth Reliance On OpenAI And Anthropic Becomes Concerning"
+    },
+    {
+      "title": "Gabelli Dividend & Income Trust: Comparative Analysis Of GDV.PR.H And GDV.PR.K",
+      "source": "Seeking Alpha",
+      "link": "https://seekingalpha.com/article/4953245-gabelli-dividend-and-income-trust-comparative-analysis-gdv-pr-h-and-gdv-pr-k?source=feed_all_articles",
+      "pubDate": "",
+      "description": "Seeking Alpha 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Gabelli Dividend & Income Trust: Comparative Analysis Of GDV.PR.H And GDV.PR.K"
+    },
+    {
+      "title": "Salesforce CEO Marc Benioff joins Trump’s AI rebranding",
+      "source": "Seeking Alpha Market Currents",
+      "link": "https://seekingalpha.com/news/4651903-salesforce-ceo-benioff-joins-trumps-ai-rebranding?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+      "pubDate": "",
+      "description": "Seeking Alpha Market Currents 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Salesforce CEO Marc Benioff joins Trump’s AI rebranding"
+    },
+    {
+      "title": "Trump turns to Russia in bid to lower diesel prices, but analysts see minimal impact",
+      "source": "Seeking Alpha Market Currents",
+      "link": "https://seekingalpha.com/news/4651899-trump-turns-to-russia-in-bid-to-lower-diesel-prices-but-analysts-see-minimal-impact?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+      "pubDate": "",
+      "description": "Seeking Alpha Market Currents 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1213764535/image_1213764535.jpg?io=getty-c-w630",
+      "is_real_image": true,
+      "original_title": "Trump turns to Russia in bid to lower diesel prices, but analysts see minimal impact"
+    },
+    {
+      "title": "Lockheed unveils next-gen Patriot interceptor to defend against hypersonic threats",
+      "source": "Seeking Alpha Market Currents",
+      "link": "https://seekingalpha.com/news/4651898-lockheed-unveils-next-gen-patriot-interceptor-to-defend-against-hypersonic-threats?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+      "pubDate": "",
+      "description": "Seeking Alpha Market Currents 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Lockheed unveils next-gen Patriot interceptor to defend against hypersonic threats"
+    },
+    {
+      "title": "Alignment Healthcare downgraded at BofA after CMS Star Rating for MA contract",
+      "source": "Seeking Alpha Market Currents",
+      "link": "https://seekingalpha.com/news/4651897-alignment-healthcare-downgraded-bofa-after-cms-star-rating-ma-contract?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+      "pubDate": "",
+      "description": "Seeking Alpha Market Currents 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1651064790/image_1651064790.jpg?io=getty-c-w630",
+      "is_real_image": true,
+      "original_title": "Alignment Healthcare downgraded at BofA after CMS Star Rating for MA contract"
+    },
+    {
+      "title": "Gold snaps two-week losing streak; some analysts say may have found bottom",
+      "source": "Seeking Alpha Market Currents",
+      "link": "https://seekingalpha.com/news/4651893-gold-snaps-two-week-losing-streak-some-analysts-say-may-have-found-bottom?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+      "pubDate": "",
+      "description": "Seeking Alpha Market Currents 最新發布之專業報導與深度分析。",
+      "category": "STOCKS",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "Gold snaps two-week losing streak; some analysts say may have found bottom"
     }
   ]
 }

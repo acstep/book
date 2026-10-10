@@ -271,6 +271,7 @@ header {
 .avatar-ai { background: linear-gradient(135deg, #1d9bf0, #00ba7c); }
 .avatar-finance { background: linear-gradient(135deg, #00ba7c, #b38600); }
 .avatar-tech { background: linear-gradient(135deg, #7952b3, #1d9bf0); }
+.avatar-stocks { background: linear-gradient(135deg, #ff8800, #e71d36); }
 
 .author-meta {
   display: flex;
@@ -317,6 +318,7 @@ header {
 .cat-chip-ai { background: #e8f5fd; color: #1d9bf0; }
 .cat-chip-finance { background: #e6f9f0; color: #00ba7c; }
 .cat-chip-tech { background: #f3ebf9; color: #8e44ad; }
+.cat-chip-stocks { background: #fff3e6; color: #ff7700; }
 
 /* 貼文主文字 (Headline & Summary) */
 .post-text-body {
@@ -906,6 +908,7 @@ header {
     <button class="tab-btn" onclick="filterCategory('AI', this)">🤖 人工智慧</button>
     <button class="tab-btn" onclick="filterCategory('FINANCE', this)">📈 全球財經</button>
     <button class="tab-btn" onclick="filterCategory('TECH', this)">⚡ 科技趨勢</button>
+    <button class="tab-btn" onclick="filterCategory('STOCKS', this)">📊 股市</button>
   </div>
 
   <div class="header-right">
@@ -972,7 +975,7 @@ const VERIFIED_ICON_SVG = `
   <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.33 2.33 4.99-4.99 1.42 1.42-6.41 6.4z"/>
 </svg>`;
 
-let allData = { AI: [], FINANCE: [], TECH: [] };
+let allData = { AI: [], FINANCE: [], TECH: [], STOCKS: [] };
 let currentTopic = 'ALL';
 let currentArticlesList = [];
 let likedPostIds = new Set();
@@ -1000,7 +1003,8 @@ async function loadNewsData(isManual = false) {
     allData = {
       AI: data.AI || [],
       FINANCE: data.FINANCE || [],
-      TECH: data.TECH || []
+      TECH: data.TECH || [],
+      STOCKS: data.STOCKS || []
     };
     renderFeed();
     if (isManual) showToast('已成功同步最新動態！');
@@ -1013,7 +1017,8 @@ async function loadNewsData(isManual = false) {
         allData = {
           AI: data.AI || [],
           FINANCE: data.FINANCE || [],
-          TECH: data.TECH || []
+          TECH: data.TECH || [],
+          STOCKS: data.STOCKS || []
         };
         renderFeed();
         return;
@@ -1053,7 +1058,7 @@ function renderFeed() {
   renderedCount = 0;
 
   let articles = [];
-  const keys = ['AI', 'FINANCE', 'TECH'];
+  const keys = ['AI', 'FINANCE', 'TECH', 'STOCKS'];
 
   if (currentTopic === 'ALL') {
     let maxLen = Math.max(...keys.map(k => (allData[k] || []).length));
@@ -1074,7 +1079,8 @@ function renderFeed() {
     'ALL': '全部焦點動態',
     'AI': '人工智慧 (AI) 專題',
     'FINANCE': '全球財經 (Finance) 專題',
-    'TECH': '科技趨勢 (Tech) 專題'
+    'TECH': '科技趨勢 (Tech) 專題',
+    'STOCKS': '美股股市 (Seeking Alpha 深度專欄)'
   };
 
   document.getElementById('feedStatusText').innerText = topicNames[currentTopic] || '即時動態';
@@ -1107,6 +1113,7 @@ function loadNextBatch() {
   const getCatBadge = (c) => {
     if (c === 'AI') return { text: '#AI', class: 'cat-chip-ai', avatarClass: 'avatar-ai', initial: 'AI' };
     if (c === 'FINANCE') return { text: '#財經', class: 'cat-chip-finance', avatarClass: 'avatar-finance', initial: '$' };
+    if (c === 'STOCKS') return { text: '#股市', class: 'cat-chip-stocks', avatarClass: 'avatar-stocks', initial: '📈' };
     return { text: '#科技', class: 'cat-chip-tech', avatarClass: 'avatar-tech', initial: '⚡' };
   };
 
@@ -1312,7 +1319,12 @@ function openReader(articleIndex) {
   if (!item) return;
 
   document.getElementById('modalImg').src = item.image;
-  const catNames = { 'AI': '🤖 人工智慧 (AI)', 'FINANCE': '📈 全球財經 (Finance)', 'TECH': '⚡ 科技趨勢 (Tech)' };
+  const catNames = {
+    'AI': '🤖 人工智慧 (AI)',
+    'FINANCE': '📈 全球財經 (Finance)',
+    'TECH': '⚡ 科技趨勢 (Tech)',
+    'STOCKS': '📊 股市精選 (Seeking Alpha)'
+  };
   document.getElementById('modalBadge').innerText = catNames[item.category] || '特刊焦點';
   document.getElementById('modalTitle').innerText = item.title;
   document.getElementById('modalSource').innerText = `📰 來源媒體：${item.source}`;
