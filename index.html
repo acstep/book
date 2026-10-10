@@ -728,11 +728,18 @@ header {
       <div id="modalContent" class="reader-content">
         文章內容排版
       </div>
-      <div class="reader-footer">
-        <span style="color:#717786;">純淨雜誌閱讀模式 · 已自動過濾所有外站廣告</span>
-        <a id="modalOrigLink" class="reader-orig-link" href="#" target="_blank">
-          若需前往原站 ↗
-        </a>
+      <div class="reader-footer" style="flex-direction: column; gap: 14px; align-items: stretch;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <a id="modalTranslateFullLink" class="reader-orig-link" style="background:var(--accent-red); color:#fff; padding:8px 16px; border-radius:6px; font-weight:700; text-decoration:none;" href="#" target="_blank">
+            🌐 點此以 Google 翻譯開啟「繁體中文」完整原文頁面 ↗
+          </a>
+          <a id="modalOrigLink" class="reader-orig-link" style="color:#8b92a4; font-size:12px;" href="#" target="_blank">
+            開啟英文原始網頁 ↗
+          </a>
+        </div>
+        <div style="font-size:12px; color:#616776; text-align:center;">
+          純淨雜誌閱讀模式 · 已自動過濾所有外站廣告
+        </div>
       </div>
     </div>
   </div>
@@ -1078,6 +1085,10 @@ function openReader(articleIndex) {
   }
   document.getElementById('modalContent').innerText = contentText;
   document.getElementById('modalOrigLink').href = item.link;
+
+  // 自動生成 Google 網頁即時全篇翻譯連結 (點擊直接全站繁體中文化)
+  const translatedWebUrl = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}`;
+  document.getElementById('modalTranslateFullLink').href = translatedWebUrl;
 
   const modal = document.getElementById('readerModal');
   modal.style.display = 'flex';
