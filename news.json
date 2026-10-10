@@ -1,6 +1,18 @@
 {
   "NVIDIA": [
     {
+      "title": "「現在不是驚慌失措的時候」：為什麼華爾街認為股市年底會上漲",
+      "source": "Finance.yahoo.com",
+      "link": "https://finance.yahoo.com/markets/article/not-the-time-to-be-skittish-why-wall-street-sees-stocks-rising-by-year-end-115918876.html?.tsrc=rss",
+      "pubDate": "Sat, 10 Oct 2026",
+      "description": "華爾街仍預期股市在年底前會出現更多漲幅。",
+      "company": "NVIDIA",
+      "ticker": "NVDA",
+      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false,
+      "original_title": "'Not the time to be skittish': Why Wall Street sees stocks rising by year-end"
+    },
+    {
       "title": "AI 代理推動首頁 Google 排名提高 30 倍後，Vannor 推出代理行銷",
       "source": "Finance.yahoo.com",
       "link": "https://finance.yahoo.com/technology/ai/articles/vannor-launches-agentic-marketing-ai-113300170.html?.tsrc=rss",
@@ -8,7 +20,7 @@
       "description": "Vannor 的自主 AI 代理研究、創建、審查、發布和改進行銷內容，同時完全在公司自有的 NVIDIA AI 基礎設施上運作。 南卡羅來納州格林維爾，2026 年 10 月 10 日（環球通訊社）—Vannor 推出了代理行銷模型，引入了自主 AI 代理，可以管理品牌的行銷工作流程，從研究和內容規劃到發布和持續優化。規模化和精準化的行銷基礎設施。 Vannor 的 AI 引擎在 NVIDIA 上運行",
       "company": "NVIDIA",
       "ticker": "NVDA",
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
       "is_real_image": false,
       "original_title": "Vannor Launches Agentic Marketing After AI Agents Drive 30-Fold Increase in First-Page Google Rankings"
     },
@@ -109,40 +121,28 @@
       "original_title": "Palantir Stock Rose 60% in the Third Quarter. Here's What Its Other Big Quarters Did Next."
     },
     {
-      "title": "Anthropic 的營收在 2025 年成長了 12 倍，但虧損也增加了 12 倍",
+      "title": "Adobe 的營收預計將在十年內成長約八倍。為什麼它的股票如此嚴重落後於市場？",
       "source": "Fool.com",
-      "link": "https://www.fool.com/investing/2026/10/10/anthropics-revenue-jumped-12-fold-in-2025-but-so-d/?.tsrc=rss",
+      "link": "https://www.fool.com/investing/2026/10/10/adobe-s-earnings-are-on-track-to-grow-about-eightfold-in-a-decade-why-has-its-stock-lagged-the-market-so-badly/?.tsrc=rss",
       "pubDate": "Sat, 10 Oct 2026",
-      "description": "人工智慧實驗室正在以驚人的速度擴展，但投資者仍然需要證據證明它可以帶來持久的利潤。",
+      "description": "其每股收益可望成長約八倍。那麼為什麼該股的跌幅如此之大呢？",
       "company": "NVIDIA",
       "ticker": "NVDA",
-      "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F889526%2Fanalyst_working_on_a_laptop.jpeg&w=1200&op=resize",
+      "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fcdn.content.foolcdn.com%2Fimages%2F1umn9qeh%2Fproduction%2F1b5cd7891446ff78daf1521ef8767672596e5ac8-1200x800.png%3Fw%3D800%26q%3D75%26fit%3Dmax%26auto%3Dformat&w=1200&op=resize",
       "is_real_image": true,
-      "original_title": "Anthropic's Revenue Jumped 12-Fold in 2025, but So Did Its Losses"
+      "original_title": "Adobe's Earnings Are on Track to Grow About Eightfold in a Decade. Why Has Its Stock Lagged the Market So Badly?"
     },
     {
-      "title": "隨著投資人收到有關川普總統經濟的壞消息，股市發出警告。歷史表明這將會發生。",
+      "title": "幾十年來，華倫·巴菲特一直就這個問題向投資人發出警告。債券市場再次讓他的建議變得重要。",
       "source": "Fool.com",
-      "link": "https://www.fool.com/investing/2026/10/10/stock-market-warning-bad-news-president-trumps-economy/?.tsrc=rss",
+      "link": "https://www.fool.com/investing/2026/10/10/warren-buffett-warned-investors-bond-market-advice/?.tsrc=rss",
       "pubDate": "Sat, 10 Oct 2026",
-      "description": "由於川普總統的政策造成持續的通膨壓力，十月消費者信心持續下降。",
+      "description": "高利率正成為市場最大的風險因素之一。",
       "company": "NVIDIA",
       "ticker": "NVDA",
-      "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fcdn.content.foolcdn.com%2Fimages%2F1umn9qeh%2Fproduction%2Fc1bb2b245e8fab5e54c1409b090e78f4ebb76b34-3000x2000.jpg%3Fw%3D800%26q%3D75%26fit%3Dmax%26auto%3Dformat&w=1200&op=resize",
+      "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F890177%2Fwarren-buffett_berkshire-hathaway-inc_chair-ceo_imagesource_getty-images_36.jpeg&w=1200&op=resize",
       "is_real_image": true,
-      "original_title": "The Stock Market Flashes a Warning as Investors Get Bad News About President Trump’s Economy. History Says This Will Happen Next."
-    },
-    {
-      "title": "波克夏海瑟威和萬事達卡不需要人工智慧來維持成長。到 2030 年，這兩款產品都值得擁有。",
-      "source": "Fool.com",
-      "link": "https://www.fool.com/investing/2026/10/10/berkshire-hathaway-and-mastercard-don-t-need-ai-to-keep-growing-both-look-worth-owning-through-2030/?.tsrc=rss",
-      "pubDate": "Sat, 10 Oct 2026",
-      "description": "兩家公司都不需要資料中心的繁榮來維持成長。未來四年值得擁有嗎？",
-      "company": "NVIDIA",
-      "ticker": "NVDA",
-      "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fcdn.content.foolcdn.com%2Fimages%2F1umn9qeh%2Fproduction%2F619c9bdd51dd42dbfd2f26c6082e9a3eeaae39b6-1200x800.jpg%3Fw%3D800%26q%3D75%26fit%3Dmax%26auto%3Dformat&w=1200&op=resize",
-      "is_real_image": true,
-      "original_title": "Berkshire Hathaway and Mastercard Don't Need AI to Keep Growing. Both Look Worth Owning Through 2030."
+      "original_title": "Warren Buffett Has Warned Investors About This for Decades. The Bond Market Is Making His Advice Matter Again."
     }
   ],
   "INTEL": [
@@ -312,8 +312,8 @@
       "description": "七巨頭正在追求不同的人工智慧策略，從桌面代理和基於雲端的助手到穿戴式裝置和客製化晶片。",
       "company": "MICROSOFT",
       "ticker": "MSFT",
-      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://news.stocktwits-cdn.com/large_Getty_Images_2286326398_84fc8215c8.jpg",
+      "is_real_image": true,
       "original_title": "MAG 7 Voices: How Nvidia, Microsoft, Alphabet, Meta Reshaped AI This Week"
     },
     {
@@ -384,8 +384,8 @@
       "description": "摩根大通、摩根士丹利和富國銀行等華爾街最大的銀行將於下周公布財報。",
       "company": "MICROSOFT",
       "ticker": "MSFT",
-      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://news.stocktwits-cdn.com/large_Getty_Images_2289192410_ae300369d4.jpg",
+      "is_real_image": true,
       "original_title": "S&P 500, Nasdaq 100, Dow End Week Higher With Traders Eyeing Earnings Season — MSFT, NFLX, SPCX, ASTS In Focus"
     },
     {
@@ -417,7 +417,7 @@
       "source": "Finance.yahoo.com",
       "link": "https://finance.yahoo.com/markets/stocks/articles/rising-earnings-estimates-fastenal-fast-221403486.html?.tsrc=rss",
       "pubDate": "Fri, 09 Oct 2026",
-      "description": "最近幾天，分析師提高了對 Fastenal 即將發布的第三季度業績的盈利預期，理由是對該公司基本面的信心有所增強，包括其強勁的利潤率和現金生成能力。這種情緒的轉變凸顯了 Fastenal 的定價能力以及不斷擴大的管理庫存和數位平台如何增強其商業模式的持久性。接下来，我们将研究分析师对 Fastenal 盈利前景信心的增强可能如何重塑……",
+      "description": "最近幾天，分析師提高了對 Fastenal 即將發布的第三季度業績的盈利預期，理由是對該公司基本面的信心有所增強，包括其強勁的利潤率和現金生成能力。這種情緒的轉變凸顯了 Fastenal 的定價能力以及不斷擴大的管理庫存和數位平台如何增強其商業模式的持久性。接下來，我們將研究分析師對 Fastenal 獲利前景信心的不斷增強可能會如何重塑…",
       "company": "MICROSOFT",
       "ticker": "MSFT",
       "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
@@ -425,11 +425,11 @@
       "original_title": "How Rising Earnings Estimates At Fastenal (FAST) Have Changed Its Investment Story"
     },
     {
-      "title": "分析師人工智慧的 5 大舉措：Gemini 代理商推出後Google再次被確認為首選",
+      "title": "人工智慧分析師的 5 大舉動：Gemini 代理推出後Google再次被確認為首選",
       "source": "Finance.yahoo.com",
       "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-215722392.html?.tsrc=rss",
       "pubDate": "Fri, 09 Oct 2026",
-      "description": "Investing.com－以下是本週人工智慧 (AI) 領域分析師的最大舉動。",
+      "description": "Investing.com——以下是本週人工智慧 (AI) 領域分析師的最大舉動。",
       "company": "MICROSOFT",
       "ticker": "MSFT",
       "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
@@ -458,8 +458,8 @@
       "description": "這些交易將 Ark 的一些較知名的股票置於賣方，包括 AMD、Alphabet 和 SpaceX，而其專注於基因組學的 ARK Genomic Revolution ETF 繼續增持生技公司的股票。",
       "company": "GOOGLE",
       "ticker": "GOOGL",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://news.stocktwits-cdn.com/large_cathiewood_OG_jpg_a3c8fddb3f.webp",
+      "is_real_image": true,
       "original_title": "Cathie Wood-Led Ark Invest Sells AMD, SPCX, GOOG Stocks — But Loads Up On CMPS, NTLA, CRSP And Other Healthcare Firms"
     },
     {
@@ -482,8 +482,8 @@
       "description": "七巨頭正在追求不同的人工智慧策略，從桌面代理和基於雲端的助手到穿戴式裝置和客製化晶片。",
       "company": "GOOGLE",
       "ticker": "GOOGL",
-      "image": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false,
+      "image": "https://news.stocktwits-cdn.com/large_Getty_Images_2286326398_84fc8215c8.jpg",
+      "is_real_image": true,
       "original_title": "MAG 7 Voices: How Nvidia, Microsoft, Alphabet, Meta Reshaped AI This Week"
     },
     {
@@ -511,11 +511,11 @@
       "original_title": "Tech Edge Will be Onsite at Money20/20 2026 in Las Vegas"
     },
     {
-      "title": "分析師人工智慧的 5 大舉措：Gemini 代理商推出後Google再次被確認為首選",
+      "title": "人工智慧分析師的 5 大舉動：Gemini 代理推出後Google再次被確認為首選",
       "source": "Finance.yahoo.com",
       "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-215722392.html?.tsrc=rss",
       "pubDate": "Fri, 09 Oct 2026",
-      "description": "Investing.com－以下是本週人工智慧 (AI) 領域分析師的最大舉動。",
+      "description": "Investing.com——以下是本週人工智慧 (AI) 領域分析師的最大舉動。",
       "company": "GOOGLE",
       "ticker": "GOOGL",
       "image": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=1200&q=80",
@@ -535,7 +535,7 @@
       "original_title": "Microsoft vs. Alphabet: Which AI Cloud Stock Is Cheaper After the Capital Spending?"
     },
     {
-      "title": "在進入財報季前，市場是否仍過度集中於科技股？",
+      "title": "進入財報季時，市場是否仍過度集中於科技股？",
       "source": "Finance.yahoo.com",
       "link": "https://finance.yahoo.com/video/are-markets-still-overconcentrated-in-tech-heading-into-earnings-season-210415308.html?.tsrc=rss",
       "pubDate": "Fri, 09 Oct 2026",
