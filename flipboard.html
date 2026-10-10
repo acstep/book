@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>TechFinance Magazine — Flipboard Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Noto+Serif+TC:wght@400;600;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #0b0c10;
+  --card-bg: #14161d;
+  --accent-red: #e71d36;
+  --gold: #d4af37;
+  --text-main: #f5f6fa;
+  --text-muted: #9ba1b0;
+  --font-serif: 'Noto Serif TC', 'Cinzel', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  touch-action: pan-y;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 頂部導航列 (優化 iPad / 手機支援) */
+header {
+  height: 56px;
+  background: rgba(11, 12, 16, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.logo-badge {
+  background: var(--accent-red);
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.brand-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.tabs-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  padding: 4px 0;
+}
+
+.tabs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text-muted);
+  padding: 5px 12px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #fff;
+  color: #0b0c10;
+  border-color: #fff;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mode-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 2px;
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+.refresh-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+/* 3D 舞台舞台容器 */
+.stage {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  overflow: hidden;
+}
+
+.magazine-viewport {
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  background: var(--card-bg);
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* 單個雜誌頁面 */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #11131a;
+  display: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.page.active {
+  display: block;
+  z-index: 10;
+  transform: translate(0, 0) rotate(0deg);
+  opacity: 1;
+}
+
+/* 封面故事 */
+.grid-cover {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 24px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .grid-cover {
+    padding: 60px 80px;
+  }
+}
+
+.grid-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,12,16,0.3) 0%, rgba(11,12,16,0.94) 85%);
+}
+
+.cover-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.cover-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--accent-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  border-radius: 2px;
+}
+
+.cover-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.3;
+  color: #ffffff;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.8);
+}
+
+@media (min-width: 768px) {
+  .cover-title {
+    font-size: 40px;
+  }
+}
+
+.cover-desc {
+  font-size: 14px;
+  color: #d1d5db;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .cover-desc {
+    font-size: 16px;
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* 雜誌排版模組網格 (支援手機單欄與 iPad/電腦雙欄) */
+.grid-bento {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  background: #0d0f15;
+}
+
+@media (min-width: 768px) {
+  .grid-bento {
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+}
+
+.card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 26px;
+  }
+  .card-hero {
+    grid-row: span 2;
+    padding: 40px 32px;
+  }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(13,15,21,0.96) 0%, rgba(13,15,21,0.48) 55%, rgba(13,15,21,0.12) 100%);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.35;
+  color: #fff;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .card-title {
+    font-size: 17px;
+    -webkit-line-clamp: 3;
+  }
+  .card-hero .card-title {
+    font-size: 24px;
+  }
+}
+
+.card-desc {
+  display: none;
+  font-size: 13px;
+  color: #c4c9d4;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+  .card-hero .card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: #8b92a4;
+}
+
+.read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* 控制底列 */
+.controls-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  color: var(--text-muted);
+  font-size: 12px;
+  flex-shrink: 0;
+  background: rgba(11, 12, 16, 0.8);
+}
+
+.flip-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #717786;
+}
+
+.page-indicator {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1.5px;
+  color: #e0e4ef;
+  font-weight: 700;
+}
+
+.flip-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* 載入動畫 */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--card-bg);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transition: opacity 0.3s ease;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent-red);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- 頂部欄 -->
+<header>
+  <div class="brand">
+    <div class="logo-badge">F</div>
+    <div class="brand-title">TECH INVESTOR</div>
+  </div>
+
+  <div class="tabs-wrapper">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTopic('ALL')">綜合精選</button>
+      <button class="tab-btn" onclick="switchTopic('NVIDIA')">NVIDIA</button>
+      <button class="tab-btn" onclick="switchTopic('INTEL')">INTEL</button>
+      <button class="tab-btn" onclick="switchTopic('MICROSOFT')">MSFT</button>
+      <button class="tab-btn" onclick="switchTopic('GOOGLE')">GOOGLE</button>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <!-- 翻頁方向切換器 (左右翻 / 上下翻) -->
+    <div class="mode-toggle">
+      <button id="mode-h" class="mode-btn active" onclick="setFlipDirection('horizontal')">左右翻</button>
+      <button id="mode-v" class="mode-btn" onclick="setFlipDirection('vertical')">上下翻</button>
+    </div>
+
+    <button class="refresh-btn" onclick="reloadNews()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- 雜誌舞台 -->
+<div class="stage">
+  <div class="magazine-viewport" id="viewport">
+    <div class="loading-overlay" id="loader">
+      <div class="spinner"></div>
+      <div style="font-family: var(--font-serif); font-size: 13px;">正在編譯 Google RSS 財經雜誌...</div>
+    </div>
+  </div>
+</div>
+
+<!-- 底部控制項 -->
+<div class="controls-bar">
+  <div class="flip-hint" id="hint-text">
+    <span>👈👉 <b>支援手勢左右滑動</b> / 鍵盤左右鍵翻頁</span>
+  </div>
+  <div class="page-indicator" id="page-num">PAGE 1 / 1</div>
+  <div class="flip-nav">
+    <button class="nav-arrow" id="prev-btn" onclick="prevPage()">◀</button>
+    <button class="nav-arrow" id="next-btn" onclick="nextPage()">▶</button>
+  </div>
+</div>
+
+<script>
+let currentTopic = 'ALL';
+let flipDirection = 'horizontal'; // 'horizontal' (左右翻) 或 'vertical' (上下翻)
+let allData = {};
+let pages = [];
+let currentPageIndex = 0;
+let isFlipping = false;
+
+// 觸控手勢變數 (iPad / 手機滑動)
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+window.addEventListener('DOMContentLoaded', () => {
+  fetchNews();
+  bindTouchAndEvents();
+});
+
+function setFlipDirection(direction) {
+  flipDirection = direction;
+  document.getElementById('mode-h').classList.toggle('active', direction === 'horizontal');
+  document.getElementById('mode-v').classList.toggle('active', direction === 'vertical');
+  
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const hint = document.getElementById('hint-text');
+
+  if (direction === 'horizontal') {
+    prevBtn.innerHTML = '◀';
+    nextBtn.innerHTML = '▶';
+    hint.innerHTML = '<span>👈👉 <b>支援手勢左右滑動</b> / 鍵盤左右鍵翻頁</span>';
+  } else {
+    prevBtn.innerHTML = '▲';
+    nextBtn.innerHTML = '▼';
+    hint.innerHTML = '<span>👆👇 <b>支援手勢上下滑動</b> / 鍵盤上下鍵翻頁</span>';
+  }
+}
+
+function switchTopic(topic) {
+  if (currentTopic === topic) return;
+  currentTopic = topic;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.innerText.includes(topic) || (topic === 'ALL' && b.innerText.includes('綜合')));
+  });
+  buildPages();
+}
+
+function reloadNews() {
+  const loader = document.getElementById('loader');
+  loader.style.display = 'flex';
+  loader.style.opacity = '1';
+  fetchNews();
+}
+
+async function fetchNews() {
+  try {
+    const res = await fetch('/api/news');
+    allData = await res.json();
+    buildPages();
+  } catch (err) {
+    console.error('Fetch error:', err);
+    alert('獲取 Google RSS 失敗，正在自動重試...');
+  } finally {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    setTimeout(() => { loader.style.display = 'none'; }, 300);
+  }
+}
+
+function buildPages() {
+  const viewport = document.getElementById('viewport');
+  const loader = document.getElementById('loader');
+  viewport.innerHTML = '';
+  viewport.appendChild(loader);
+
+  let articles = [];
+  if (currentTopic === 'ALL') {
+    const keys = ['NVIDIA', 'INTEL', 'MICROSOFT', 'GOOGLE'];
+    let maxLen = Math.max(...keys.map(k => (allData[k] || []).length));
+    for (let i = 0; i < maxLen; i++) {
+      for (const k of keys) {
+        if (allData[k] && allData[k][i]) {
+          articles.push(allData[k][i]);
+        }
+      }
+    }
+  } else {
+    articles = allData[currentTopic] || [];
+  }
+
+  pages = [];
+
+  if (articles.length === 0) {
+    const emptyPage = document.createElement('div');
+    emptyPage.className = 'page active';
+    emptyPage.innerHTML = `<div style="height:100%; display:flex; align-items:center; justify-content:center;"><h2>暫無資料</h2></div>`;
+    viewport.appendChild(emptyPage);
+    updateUI();
+    return;
+  }
+
+  // 封面頁
+  const cover = articles[0];
+  const p1 = document.createElement('div');
+  p1.className = 'page';
+  p1.innerHTML = `
+    <div class="grid-cover" style="background-image: url('${cover.image}')">
+      <div class="cover-content">
+        <span class="cover-tag">${cover.company} · ${cover.ticker} 特刊焦點</span>
+        <h1 class="cover-title">${cover.title}</h1>
+        <p class="cover-desc">${cover.description}</p>
+        <div class="card-meta" style="margin-bottom: 16px;">
+          <span>📰 ${cover.source}</span>
+          <span>📅 ${cover.pubDate}</span>
+        </div>
+        <a href="${cover.link}" target="_blank" class="cover-tag" style="background:#fff; color:#0b0c10; text-decoration:none; cursor:pointer;">
+          閱讀完整原文 ↗
+        </a>
+      </div>
+    </div>
+  `;
+  viewport.appendChild(p1);
+  pages.push(p1);
+
+  // 雜誌分頁 (每頁 3 篇)
+  let idx = 1;
+  while (idx < articles.length) {
+    const chunk = articles.slice(idx, idx + 3);
+    const p = document.createElement('div');
+    p.className = 'page';
+
+    const h = chunk[0], s1 = chunk[1], s2 = chunk[2];
+    let html = `<div class="grid-bento">`;
+
+    if (h) {
+      html += `
+        <a href="${h.link}" target="_blank" class="card card-hero" style="background-image: url('${h.image}')">
+          <div class="card-content">
+            <span class="card-badge">● ${h.company} (${h.ticker})</span>
+            <h2 class="card-title">${h.title}</h2>
+            <p class="card-desc">${h.description}</p>
+            <div class="card-meta">
+              <span>${h.source}</span>
+              <span>${h.pubDate}</span>
+            </div>
+            <div class="read-btn">開啟閱讀 ↗</div>
+          </div>
+        </a>
+      `;
+    }
+
+    if (s1) {
+      html += `
+        <a href="${s1.link}" target="_blank" class="card" style="background-image: url('${s1.image}')">
+          <div class="card-content">
+            <span class="card-badge">● ${s1.company}</span>
+            <h3 class="card-title">${s1.title}</h3>
+            <div class="card-meta">
+              <span>${s1.source}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    if (s2) {
+      html += `
+        <a href="${s2.link}" target="_blank" class="card" style="background-image: url('${s2.image}')">
+          <div class="card-content">
+            <span class="card-badge">● ${s2.company}</span>
+            <h3 class="card-title">${s2.title}</h3>
+            <div class="card-meta">
+              <span>${s2.source}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    html += `</div>`;
+    p.innerHTML = html;
+    viewport.appendChild(p);
+    pages.push(p);
+    idx += 3;
+  }
+
+  currentPageIndex = 0;
+  if (pages.length > 0) {
+    pages[0].classList.add('active');
+  }
+  updateUI();
+}
+
+function updateUI() {
+  const indicator = document.getElementById('page-num');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  const total = Math.max(1, pages.length);
+  indicator.innerText = `PAGE ${currentPageIndex + 1} / ${total}`;
+
+  prevBtn.disabled = currentPageIndex <= 0;
+  nextBtn.disabled = currentPageIndex >= pages.length - 1;
+}
+
+// 翻至下一頁 (支援左右翻或上下翻 3D 動畫)
+function nextPage() {
+  if (isFlipping || currentPageIndex >= pages.length - 1) return;
+  isFlipping = true;
+
+  const current = pages[currentPageIndex];
+  const next = pages[currentPageIndex + 1];
+
+  const duration = '0.62s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+
+  if (flipDirection === 'horizontal') {
+    // 左右翻：書本向左翻折
+    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
+    current.style.transformOrigin = 'left center';
+    current.style.transform = 'rotateY(-90deg) scale(0.95)';
+    current.style.opacity = '0';
+
+    next.style.display = 'block';
+    next.style.transformOrigin = 'right center';
+    next.style.transform = 'rotateY(90deg) scale(0.95)';
+    next.style.opacity = '0';
+    next.style.transition = `transform ${duration}, opacity 0.62s ease`;
+  } else {
+    // 上下翻：向上掀開
+    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
+    current.style.transformOrigin = 'top center';
+    current.style.transform = 'rotateX(-90deg) scale(0.95)';
+    current.style.opacity = '0';
+
+    next.style.display = 'block';
+    next.style.transformOrigin = 'bottom center';
+    next.style.transform = 'rotateX(90deg) scale(0.95)';
+    next.style.opacity = '0';
+    next.style.transition = `transform ${duration}, opacity 0.62s ease`;
+  }
+
+  next.offsetHeight; // trigger reflow
+
+  next.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+  next.style.opacity = '1';
+
+  setTimeout(() => {
+    current.classList.remove('active');
+    current.style.display = 'none';
+    current.style.transform = '';
+    current.style.opacity = '';
+
+    next.classList.add('active');
+    next.style.transform = '';
+    next.style.opacity = '';
+
+    currentPageIndex++;
+    updateUI();
+    isFlipping = false;
+  }, 620);
+}
+
+// 翻至上一頁
+function prevPage() {
+  if (isFlipping || currentPageIndex <= 0) return;
+  isFlipping = true;
+
+  const current = pages[currentPageIndex];
+  const prev = pages[currentPageIndex - 1];
+
+  const duration = '0.62s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+
+  if (flipDirection === 'horizontal') {
+    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
+    current.style.transformOrigin = 'right center';
+    current.style.transform = 'rotateY(90deg) scale(0.95)';
+    current.style.opacity = '0';
+
+    prev.style.display = 'block';
+    prev.style.transformOrigin = 'left center';
+    prev.style.transform = 'rotateY(-90deg) scale(0.95)';
+    prev.style.opacity = '0';
+    prev.style.transition = `transform ${duration}, opacity 0.62s ease`;
+  } else {
+    current.style.transition = `transform ${duration}, opacity 0.62s ease`;
+    current.style.transformOrigin = 'bottom center';
+    current.style.transform = 'rotateX(90deg) scale(0.95)';
+    current.style.opacity = '0';
+
+    prev.style.display = 'block';
+    prev.style.transformOrigin = 'top center';
+    prev.style.transform = 'rotateX(-90deg) scale(0.95)';
+    prev.style.opacity = '0';
+    prev.style.transition = `transform ${duration}, opacity 0.62s ease`;
+  }
+
+  prev.offsetHeight; // trigger reflow
+
+  prev.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+  prev.style.opacity = '1';
+
+  setTimeout(() => {
+    current.classList.remove('active');
+    current.style.display = 'none';
+    current.style.transform = '';
+    current.style.opacity = '';
+
+    prev.classList.add('active');
+    prev.style.transform = '';
+    prev.style.opacity = '';
+
+    currentPageIndex--;
+    updateUI();
+    isFlipping = false;
+  }, 620);
+}
+
+// 綁定觸控滑動 (iPad / 手機) 與鍵盤/滾輪
+function bindTouchAndEvents() {
+  const vp = document.getElementById('viewport');
+
+  // 觸控開始
+  vp.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  // 觸控結束
+  vp.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: true });
+
+  // 鍵盤支援
+  window.addEventListener('keydown', (e) => {
+    if (flipDirection === 'horizontal') {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextPage();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevPage();
+    } else {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') nextPage();
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') prevPage();
+    }
+  });
+
+  // 滑鼠滾輪
+  let wheelDelta = 0;
+  window.addEventListener('wheel', (e) => {
+    wheelDelta += e.deltaY;
+    if (Math.abs(wheelDelta) > 40) {
+      if (wheelDelta > 0) nextPage();
+      else prevPage();
+      wheelDelta = 0;
+    }
+  }, { passive: true });
+}
+
+function handleSwipe() {
+  const diffX = touchEndX - touchStartX;
+  const diffY = touchEndY - touchStartY;
+  const threshold = 40; // 最小觸控滑動距離
+
+  if (flipDirection === 'horizontal') {
+    // 左右滑動模式
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+      if (diffX < 0) {
+        // 向左滑 -> 下一頁
+        nextPage();
+      } else {
+        // 向右滑 -> 上一頁
+        prevPage();
+      }
+    }
+  } else {
+    // 上下滑動模式
+    if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > threshold) {
+      if (diffY < 0) {
+        // 向上滑 -> 下一頁
+        nextPage();
+      } else {
+        // 向下滑 -> 上一頁
+        prevPage();
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
