@@ -1526,20 +1526,9 @@ async function fetchAndTranslateSnippet(articleUrl, targetElement) {
     if (!resp.ok) return;
     const text = await resp.text();
 
-    // 濾除標頭元數據，取出前 2~3 個有效段落 (約 250~350 字元)
-    let clean = text.replace(/^Title:[^\n]*\n/i, '')
-                    .replace(/^URL Source:[^\n]*\n/i, '')
-                    .replace(/^Published Time:[^\n]*\n/i, '')
-                    .replace(/^Markdown Content:[^\n]*\n/i, '');
-
-    const paragraphs = clean.split('\n')
-      .map(p => p.trim())
-      .filter(p => p.length > 25 && !p.startsWith('#') && !p.startsWith('![') && !p.startsWith('>') && !p.startsWith('['));
-
-    if (paragraphs.length === 0) return;
-
-    // 合併前 1~2 段組合成適中的 4~5 行長度
-    let candidateText = (paragraphs[0] + ' ' + (paragraphs[1] || '')).slice(0, 360).trim();
+    // 智慧定位正文：精準過濾網站導航、訂閱提示、跳轉連結、網址列與時間戳
+    const candidateText = extractArticleKeyPoints(text);
+    if (!candidateText || candidateText.length < 25) return;
 
     // 在本地端翻譯成繁體中文
     const translated = await translateTextClient(candidateText);
@@ -1552,6 +1541,70 @@ async function fetchAndTranslateSnippet(articleUrl, targetElement) {
   } catch (err) {
     // 保持預設簡介，不中斷頁面
   }
+}
+
+// 智慧核心萃取器：鎖定 Summary、重點清單或核心正文，徹底濾除導航與網址雜訊
+function extractArticleKeyPoints(md) {
+  const lines = md.split('\n');
+  const summaryBullets = [];
+  const bodyParagraphs = [];
+  let inSummary = false;
+
+  for (let rawLine of lines) {
+    let line = rawLine.trim();
+    if (!line) continue;
+
+    // 遇到 Summary / Highlights / Key Takeaways 區塊標題
+    if (/^#{1,3}\s+(Summary|Key Takeaways|Executive Summary|Core Thesis|Highlights|投資要點|核心觀點)/i.test(line)) {
+      inSummary = true;
+      continue;
+    }
+
+    if (inSummary) {
+      if (line.startsWith('#')) {
+        inSummary = false;
+      } else if (/^[*\-]\s+/.test(line)) {
+        // 清理 markdown 連結語法 [text](url) -> text
+        let cleanBullet = line.replace(/^[*\-]\s+/, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
+        if (cleanBullet.length > 15 && !cleanBullet.startsWith('![')) {
+          summaryBullets.push(cleanBullet);
+        }
+        continue;
+      }
+    }
+
+    // 正文段落收集 (過濾導覽雜訊、網址、時間戳、訂閱廣告)
+    if (!inSummary && !line.startsWith('#') && !line.startsWith('!') && !line.startsWith('>')) {
+      // 排除純連結行或含有網址、導航的噪音
+      if (line.startsWith('[') && line.endsWith(')')) continue;
+      if (/https?:\/\//i.test(line) && line.length < 90) continue;
+      
+      const lower = line.toLowerCase();
+      if (lower.includes('skip to') || lower.includes('create free account') || lower.includes('subscriptions') ||
+          lower.includes('all rights reserved') || lower.includes('cookie policy') || lower.includes('published time:') ||
+          lower.includes('url source:') || lower.includes('home page') || lower.includes('stock analysis')) {
+        continue;
+      }
+
+      let cleanP = line.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
+      // 段落長度適中才視為真實文章內文
+      if (cleanP.length >= 45) {
+        bodyParagraphs.push(cleanP);
+      }
+    }
+  }
+
+  // 優先返回文章的 2~3 個 Summary 要點 (Seeking Alpha、金融專欄最標準的 4~5 行精華)
+  if (summaryBullets.length >= 2) {
+    return summaryBullets.slice(0, 3).join(' ');
+  }
+
+  // 否則取前 1~2 個高質量正文段落
+  if (bodyParagraphs.length > 0) {
+    return bodyParagraphs.slice(0, 2).join(' ').slice(0, 380).trim();
+  }
+
+  return '';
 }
 
 // 內頁閱讀器專欄 (autoLoadMagazine: 是否直接載入雜誌排版並全篇繁中翻譯)
@@ -1841,13 +1894,23 @@ function formatMagazineMarkdown(md) {
     // 一般段落 (過濾雜訊鏈結)
     if (inList) { html.push('</ul>'); inList = false; }
 
-    // 移除純外鏈廣告導航 (如 [Cookie Policy] 或 [Sign in])
-    if (/^\[[^\]]+\]\([^)]+\)$/.test(line) && line.length < 50) {
+    // 移除純外鏈廣告導航、時間戳、版權宣告與會員註冊提示
+    if (/^\[[^\]]+\]\([^)]+\)$/.test(line)) continue;
+    if (/https?:\/\//i.test(line) && line.length < 90) continue;
+
+    const lower = line.toLowerCase();
+    if (lower.includes('skip to') || lower.includes('create free account') || lower.includes('explore products') ||
+        lower.includes('all rights reserved') || lower.includes('cookie policy') || lower.includes('home page') ||
+        lower.includes('published time:') || lower.includes('url source:') || lower.includes('stock analysis')) {
       continue;
     }
 
+    // 清理 markdown 連結語法，保留乾淨文字
+    let cleanLine = line.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
+    if (cleanLine.length < 10) continue;
+
     // 轉義並支援粗體 **text**
-    let formatted = escapeHtml(line);
+    let formatted = escapeHtml(cleanLine);
     formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
     html.push(`<p>${formatted}</p>`);
