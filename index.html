@@ -499,25 +499,6 @@ header {
 }
 
 /* ============================================================
-   雜誌純淨閱讀視窗 (Clean Reader Modal — 無廣告、純排版)
-   ============================================================ */
-.reader-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(7, 8, 12, 0.94);
-  backdrop-filter: blur(20px);
-  z-index: 200;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  justify-content: center;
-  padding: 20px 16px 60px 16px;
-}
-
-.reader-modal.active {
-/* ============================================================
    頂級雜誌內頁排版專欄 (High-End Magazine Article View)
    ============================================================ */
 .reader-modal {
@@ -1237,15 +1218,28 @@ function closeReaderOnBackdrop(e) {
 function bindTouchAndEvents() {
   const vp = document.getElementById('viewport');
 
+  let isTouchMoved = false;
+
   vp.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
+    isTouchMoved = false;
+  }, { passive: true });
+
+  vp.addEventListener('touchmove', (e) => {
+    const diffX = Math.abs(e.changedTouches[0].screenX - touchStartX);
+    const diffY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+    if (diffX > 15 || diffY > 15) {
+      isTouchMoved = true;
+    }
   }, { passive: true });
 
   vp.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
+    if (isTouchMoved) {
+      handleSwipe();
+    }
   }, { passive: true });
 
   window.addEventListener('keydown', (e) => {
