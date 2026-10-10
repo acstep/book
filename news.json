@@ -1,6 +1,17 @@
 {
   "NVIDIA": [
     {
+      "title": "Vannor Launches Agentic Marketing After AI Agents Drive 30-Fold Increase in First-Page Google Rankings",
+      "source": "Finance.yahoo.com",
+      "link": "https://finance.yahoo.com/technology/ai/articles/vannor-launches-agentic-marketing-ai-113300170.html?.tsrc=rss",
+      "pubDate": "Sat, 10 Oct 2026",
+      "description": "Vannor’s autonomous AI agents research, create, review, publish and improve marketing content while running entirely on company-owned NVIDIA AI infrastructure.Greenville, SC, Oct. 10, 2026 (GLOBE NEWSWIRE) -- Vannor launched its agentic marketing model, introducing autonomous AI agents that can manage a brand’s marketing workflow from research and content planning through publication and ongoing optimization. Marketing infrastructure for scale and precision. Vannor's AI engines run on the NVIDIA",
+      "company": "NVIDIA",
+      "ticker": "NVDA",
+      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=80",
+      "is_real_image": false
+    },
+    {
       "title": "Prediction: This Will Be the Next Big AI Gold Rush and This Company Will Be the Winner.",
       "source": "Fool.com",
       "link": "https://www.fool.com/investing/2026/10/10/prediction-this-will-be-the-next-big-ai-gold-rush-and-this-company-will-be-the-winner/?.tsrc=rss",
@@ -10,17 +21,6 @@
       "ticker": "NVDA",
       "image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fcdn.content.foolcdn.com%2Fimages%2F1umn9qeh%2Fproduction%2F42b3293e5dbbd0bd2f50afbeec4738a002bd7f0b-1280x720.png%3Fw%3D800%26q%3D75%26fit%3Dmax%26auto%3Dformat&w=1200&op=resize",
       "is_real_image": true
-    },
-    {
-      "title": "UK data centre giant removed evidence of China deal ahead of $35bn listing",
-      "source": "Telegraph.co.uk",
-      "link": "https://www.telegraph.co.uk/business/2026/10/10/uk-data-centre-giant-removed-evidence-of-china-deal-ahead-o/?.tsrc=rss",
-      "pubDate": "Sat, 10 Oct 2026",
-      "description": "A British AI champion removed references to its relationship with the Chinese technology giant Bytedance from official filings before a planned $35bn (£26bn) public listing on Wall Street.",
-      "company": "NVIDIA",
-      "ticker": "NVDA",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
-      "is_real_image": false
     },
     {
       "title": "Tim Cook's Final Apple Earnings Call Showed the Company Made More Quarterly Revenue Than It Booked in All of Fiscal 2011, the Year He Became CEO. What Does That Growth Curve Mean for Apple Under John Ternus?",
