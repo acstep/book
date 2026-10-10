@@ -1361,7 +1361,7 @@ function loadNextBatch() {
 
       <!-- 社交互動欄 (Facebook / Twitter Actions) -->
       <div class="action-bar">
-        <button class="action-item" onclick="openReader(${index})">
+        <button class="action-item" onclick="openReader(${index}, true)" title="直接展開雜誌排版並翻譯全篇">
           <svg viewBox="0 0 24 24">
             <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-1.602 4.41c-.42 1.16-1.933 1.34-2.615.32l-2.029-3.03c-.55.04-1.1.06-1.653.06-4.421 0-8.005-3.58-8.005-8z"/>
           </svg>
@@ -1487,8 +1487,8 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// 內頁閱讀器專欄
-function openReader(articleIndex) {
+// 內頁閱讀器專欄 (autoLoadMagazine: 是否直接載入雜誌排版並全篇繁中翻譯)
+function openReader(articleIndex, autoLoadMagazine = false) {
   const item = currentArticlesList[articleIndex];
   if (!item) return;
 
@@ -1541,10 +1541,12 @@ function openReader(articleIndex) {
   window.currentActiveArticle = item;
   const fullBody = document.getElementById('modalFullBody');
   const fetchBtn = document.getElementById('modalFetchFullBtn');
+  const transBtn = document.getElementById('modalTranslateFullBtn');
   fullBody.innerHTML = '';
   fullBody.style.display = 'none';
   fetchBtn.disabled = false;
   fetchBtn.innerHTML = '<span>載入完整雜誌排版</span>';
+  if (transBtn) transBtn.style.display = 'none';
 
   const translatedWebUrl = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent(item.link)}`;
   document.getElementById('modalTranslateFullLink').href = translatedWebUrl;
@@ -1554,10 +1556,15 @@ function openReader(articleIndex) {
   modal.offsetHeight;
   modal.classList.add('active');
   modal.scrollTop = 0;
+
+  // 若使用者點擊卡片底部「閱讀」按鈕，直接自動載入完整雜誌排版並自動全篇翻譯繁中
+  if (autoLoadMagazine) {
+    fetchMagazineArticle(true);
+  }
 }
 
-// 雜誌模式：透過 Jina Reader 萃取乾淨內文與圖片，濾除廣告與導覽
-async function fetchMagazineArticle() {
+// 雜誌模式：透過 Jina Reader 萃取乾淨內文與圖片，濾除廣告與導覽 (autoTranslate: 是否自動繁中翻譯)
+async function fetchMagazineArticle(autoTranslate = false) {
   const item = window.currentActiveArticle;
   if (!item || !item.link) return;
 
@@ -1599,6 +1606,11 @@ async function fetchMagazineArticle() {
     window.magazineTranslatedHtml = null;
 
     showToast('已完成雜誌沉浸排版 📖');
+
+    // 若設定自動翻譯，緊接著執行全篇繁體中文翻譯
+    if (autoTranslate) {
+      await translateMagazineBody();
+    }
   } catch (err) {
     console.error('Magazine reader error:', err);
     fullBody.innerHTML = `
